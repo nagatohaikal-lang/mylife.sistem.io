@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="gold">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MYSISTEM - Apex OS v16</title>
+    <!-- Tipografi Premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ════════════════════════════════════════════════════════════════════════
+           [ 1. HUKUM ALAM: VARIABEL SISTEM & TEMA ]
+           ════════════════════════════════════════════════════════════════════════ */
+        :root {
+            --bg-obsidian: #030305;
+            --bg-panel: rgba(8, 5, 18, 0.48);
+            --text-main: #F8FAFC;
+            --text-muted: #8B9BB4;
+            --color-danger: #FF2A55;
+            --color-success: #00E676;
+            --color-warning: #FFAB00;
+            --color-info: #00BFFF;
+            --glass-blur: blur(22px);
+            --glass-border: rgba(255, 255, 255, 0.09);
+            --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            --header-h: 75px;
+            --sidebar-w: 270px;
+        }
+
+        /* TEMA DINAMIS (Elegan, Solid, Premium) */
+        [data-theme="gold"] {
+            --accent-main: #FFD700;
+            --accent-glow: 0 0 20px rgba(255, 215, 0, 0.4);
+            --accent-border: rgba(255, 215, 0, 0.5);
+            --accent-bg: rgba(255, 215, 0, 0.1);
+            --accent-grad: linear-gradient(135deg, #B8860B, #FFD700);
+        }
+        [data-theme="cyan"] {
+            --accent-main: #00F0FF;
+            --accent-glow: 0 0 20px rgba(0, 240, 255, 0.4);
+            --accent-border: rgba(0, 240, 255, 0.5);
+            --accent-bg: rgba(0, 240, 255, 0.1);
+            --accent-grad: linear-gradient(135deg, #0057FF, #00F0FF);
+        }
+        [data-theme="purple"] {
+            --accent-main: #9D4EDD;
+            --accent-glow: 0 0 20px rgba(176, 38, 255, 0.4);
+            --accent-border: rgba(176, 38, 255, 0.5);
+            --accent-bg: rgba(176, 38, 255, 0.1);
+            --accent-grad: linear-gradient(135deg, #6411AD, #9D4EDD);
+        }
+        [data-theme="quantum"] {
+            --accent-main: #E2E8F0;
+            --accent-glow: 0 0 20px rgba(255, 255, 255, 0.5);
+            --accent-border: rgba(255, 255, 255, 0.3);
+            --accent-bg: rgba(255, 255, 255, 0.1);
+            --accent-grad: linear-gradient(135deg, #94A3B8, #F8FAFC);
+        }
+        [data-theme="kultivasi"] {
+            --accent-main: #00FF88; /* Jade Green */
+            --accent-glow: 0 0 15px rgba(0, 255, 136, 0.4);
+            --accent-border: rgba(0, 255, 136, 0.5);
+            --accent-bg: rgba(0, 255, 136, 0.1);
+            /* Gradasi Hijau, Hitam, dan Putih sesuai permintaan */
+            --accent-grad: linear-gradient(135deg, #000000, #00FF88, #FFFFFF);
+        }
+        [data-theme="galaxy"] {
+            --accent-main: #FF007F; /* Deep Rose/Magenta */
+            --accent-glow: 0 0 15px rgba(255, 0, 127, 0.4);
+            --accent-border: rgba(255, 0, 127, 0.5);
+            --accent-bg: rgba(255, 0, 127, 0.1);
+            --accent-grad: linear-gradient(135deg, #4c0519, #FF007F);
+        }
+
+        /* ════════════════════════════════════════════════════════════════════════
+           [ 2. RESET & GAYA GLOBAL ]
+           ════════════════════════════════════════════════════════════════════════ */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background:
+                radial-gradient(ellipse at 18% 28%, rgba(72, 0, 160, 0.22) 0%, transparent 52%),
+                radial-gradient(ellipse at 82% 12%, rgba(0, 55, 180, 0.17) 0%, transparent 46%),
+                radial-gradient(ellipse at 58% 82%, rgba(110, 0, 75, 0.16) 0%, transparent 52%),
+                radial-gradient(ellipse at 38% 55%, rgba(20, 0, 90, 0.13) 0%, transparent 42%),
+                radial-gradient(ellipse at 92% 68%, rgba(50, 0, 130, 0.13) 0%, transparent 42%),
+                radial-gradient(ellipse at 50% 50%, rgba(5, 0, 20, 0.98) 0%, #030305 100%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif; font-size: 14px;
+            overflow: hidden; width: 100vw; height: 100vh; display: flex; flex-direction: column;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.5px; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .txt-accent { color: var(--accent-main); text-shadow: var(--accent-glow); }
+        .txt-muted { color: var(--text-muted); }
+        .txt-danger { color: var(--color-danger); text-shadow: 0 0 10px rgba(255,42,85,0.4); }
+        .txt-success { color: var(--color-success); text-shadow: 0 0 10px rgba(0,230,118,0.4); }
+
+        /* Teks Emas Elegan untuk Prinsip Mutlak */
+        .text-principle-gold {
+            color: #FFD700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.2);
+            font-family: 'Cinzel', serif; letter-spacing: 1.5px; font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* Teks Hologram untuk Nama "Pewaris" */
+        .text-hologram {
+            background: linear-gradient(90deg, #00F0FF, #FFD700, #B026FF, #00F0FF);
+            background-size: 200% auto; color: transparent;
+            -webkit-background-clip: text; background-clip: text;
+            animation: holoShine 4s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            font-weight: 800;
+        }
+
+        /* Emas Menyala untuk Slider */
+        .text-slide-gold {
+            color: #FFD700;
+            text-shadow: 0 0 20px #FFD700, 0 0 40px #FF8C00;
+            font-family: 'Cinzel', serif; font-weight: 800; letter-spacing: 2px;
+        }
+
+        @keyframes holoShine { to { background-position: 200% center; } }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-main); }
+
+        #bg-canvas { position: fixed; inset: 0; z-index: -10; pointer-events: none; opacity: 0.7; }
+        body.eco-mode #bg-canvas { display: none; }
+
+        /* ════════════════════════════════════════════════════════════════════════
+           [ 3. KOMPONEN UI UTAMA (SOLID GLASS) ]
+           ════════════════════════════════════════════════════════════════════════ */
+        .glass-panel {
+            background: var(--bg-panel); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            padding: 24px; box-shadow: var(--glass-shadow); position: relative; overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-panel:hover { border-color: rgba(255,255,255,0.15); box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
+        
+        .panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; }
+        .panel-title { font-size: 18px; color: var(--accent-main); display: flex; align-items: center; gap: 10px; text-shadow: var(--accent-glow); font-family: 'Cinzel'; font-weight: 700; }
+
+        /* Tombol Solid Elegan */
+        .btn {
+            background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border);
+            color: var(--text-main); padding: 12px 20px; border-radius: 8px;
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;
+            cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; justify-content: center;
+        }
+        .btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
+        .btn:active { transform: scale(0.96); }
+        
+        .btn-accent { background: var(--accent-main); color: var(--bg-obsidian); border: none; font-weight: 700; box-shadow: var(--accent-glow); background: var(--accent-grad); }
+        .btn-accent:hover { filter: brightness(1.2); box-shadow: 0 0 25px var(--accent-main); transform: translateY(-2px); color: var(--bg-obsidian); }
+        
+        .btn-danger { background: rgba(255,42,85,0.1); border-color: rgba(255, 42, 85, 0.4); color: var(--color-danger); }
+        .btn-danger:hover { background: var(--color-danger); color: #fff; box-shadow: 0 0 15px var(--color-danger); }
+
+        .input-box {
+            width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border);
+            color: var(--text-main); padding: 14px 16px; border-radius: 8px;
+            font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: 0.3s; margin-bottom: 15px;
+        }
+        .input-box:focus { border-color: var(--accent-main); box-shadow: inset 0 0 10px var(--accent-bg); background: rgba(0,0,0,0.8); }
+        
+        select.input-box { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; }
+
+        .bar-wrap { width: 100%; height: 8px; background: rgba(0,0,0,0.6); border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; margin-top: 5px; cursor: pointer; }
+        .bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        /* Bar XP Kinetik (Hologram Transparan Elegan) */
+        .bg-xp { background: linear-gradient(90deg, rgba(0,200,255,0.65), rgba(255,215,0,0.60), rgba(160,60,255,0.65), rgba(0,200,255,0.65)); background-size: 250% auto; animation: holoShine 5s linear infinite; box-shadow: 0 0 8px rgba(120,80,255,0.25), 0 0 16px rgba(0,200,255,0.12); }
+        
+        /* PERBAIKAN: kelas bg-hologram dipakai di bar XP tapi sebelumnya tidak punya definisi warna,
+           sehingga bar XP tidak terlihat (tidak ada garis/warnanya). Disamakan dengan gradasi hologram. */
+        .bg-hologram { background: linear-gradient(90deg, rgba(0,200,255,0.60), rgba(160,60,255,0.62), rgba(255,215,0,0.58), rgba(0,200,255,0.60)); background-size: 300% auto; animation: holoShine 6s linear infinite; box-shadow: 0 0 10px rgba(130,70,255,0.28), 0 0 20px rgba(0,180,255,0.12); }
+        
+        .bg-hp { background: var(--color-danger); box-shadow: 0 0 10px var(--color-danger); }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; font-family: var(--font-mono); border: 1px solid currentColor; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Switch iOS */
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; margin-right: 10px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.1); transition: .4s; border-radius: 24px; border: 1px solid var(--glass-border); }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 3px; background-color: #fff; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--accent-main); border-color: var(--accent-main); box-shadow: var(--accent-glow); }
+        input:checked + .slider:before { transform: translateX(20px); background-color: var(--bg-obsidian); }
+
+        /* ════════════════════════════════════════════════════════════════════════
+           [ 4. TATA LETAK DIMENSI (LAYOUT) ]
+           ════════════════════════════════════════════════════════════════════════ */
+        #layout-core { display: flex; flex: 1; overflow: hidden; position: relative; z-index: 1; }
+
+        /* SIDEBAR DESKTOP */
+        #sidebar {
+            width: var(--sidebar-w); background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(25px);
+            border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; z-index: 20;
+        }
+        .brand-zone { padding: 30px 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--glass-border); background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent); }
+        
+        /* AVATAR KOTAK PREMIUM DENGAN YINYANG BERPUTAR PELAN */
+        .avatar-box-square {
+            width: 55px; height: 55px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(255,215,0,0.1), rgba(176,38,255,0.1));
+            border: 1px solid var(--accent-border); display: flex; align-items: center; justify-content: center; font-size: 28px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 15px var(--accent-bg); position: relative; z-index: 2;
+            transition: 0.3s; color: var(--accent-main);
+        }
+        .avatar-box-square:hover { transform: scale(1.05); box-shadow: var(--accent-glow); }
+        
+        .avatar-corner-icon {
+            position: absolute; bottom: -6px; right: -6px; width: 22px; height: 22px;
+            background: var(--bg-obsidian); border: 1px solid var(--accent-main); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 13px;
+            color: var(--accent-main); box-shadow: 0 0 8px var(--bg-obsidian);
+            animation: spin 10s linear infinite; /* Berputar pelan */
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        .brand-text h1 { font-size: 18px; letter-spacing: 1px; font-family: 'Cinzel'; }
+        .brand-text p { font-size: 10px; color: var(--accent-main); font-family: var(--font-mono); letter-spacing: 2px; opacity: 0.8; }
+
+        .nav-list { flex: 1; padding: 20px 15px; display: flex; flex-direction: column; gap: 5px; overflow-y: auto; }
+        .nav-item {
+            padding: 14px 18px; border-radius: 10px; color: var(--text-muted);
+            display: flex; align-items: center; gap: 15px; font-weight: 500; font-size: 14px;
+            cursor: pointer; transition: 0.3s; border-left: 3px solid transparent;
+        }
+        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; transition: 0.3s; }
+        .nav-item:hover { color: var(--text-main); background: rgba(255,255,255,0.03); transform: translateX(5px); }
+        .nav-item.active { background: var(--accent-bg); color: var(--accent-main); border-left-color: var(--accent-main); font-weight: 600; box-shadow: inset 0 0 10px var(--accent-bg); }
+        .nav-item.active svg { filter: drop-shadow(var(--accent-glow)); }
+
+        /* KONTEN UTAMA */
+        #main-view { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        
+        #topbar {
+            height: var(--header-h); padding: 0 40px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border); background: linear-gradient(180deg, rgba(3,3,5,0.9), transparent); z-index: 10;
+        }
+        .view-title-main { font-size: 24px; color: var(--text-main); font-family: 'Cinzel'; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        
+        #content-area { flex: 1; padding: 35px 40px; overflow-y: auto; scroll-behavior: smooth; z-index: 5; }
+        .view-pane { display: none; animation: fadeSlideUp 0.4s ease forwards; }
+        .view-pane.active { display: block; }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* GRID UMUM */
+        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+        .col-12 { grid-column: span 12; } .col-8 { grid-column: span 8; } .col-6 { grid-column: span 6; } .col-5 { grid-column: span 5; } .col-7 { grid-column: span 7; } .col-4 { grid-column: span 4; } .col-3 { grid-column: span 3; }
+
+        /* ════════════════════════════════════════════════════════════════════════
+           [ 5. DESAIN FITUR (MODULES) ]
+           ════════════════════════════════════════════════════════════════════════ */
+        
+        /* --- 1. Dashboard (Home) --- */
+        .clock-display { font-family: var(--font-mono); font-size: 15px; font-weight: bold; color: var(--accent-main); text-shadow: var(--accent-glow); letter-spacing: 1px; }
+        
+        /* Slide Settings Top (Emas Menyala) */
+        .slide-banner { overflow: hidden; white-space: nowrap; flex: 1; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px; margin-left: 20px; position: relative; }
+        .slide-content { display: inline-block; animation: slideText 25s linear infinite; }
+        @keyframes slideText { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        .hero-stats {
+            display: flex; flex-direction: column; justify-content: center; gap: 15px;
+            background: linear-gradient(180deg, rgba(12,7,22,0.90), rgba(5,3,12,0.94));
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            backdrop-filter: blur(28px) saturate(1.4);
+            -webkit-backdrop-filter: blur(28px) saturate(1.4);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.75), inset 0 0 25px rgba(0,180,255,0.04);
+        }
+        /* Hologram bar at top - mirip hukum mutlak tapi transparan */
+        .hero-stats::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, rgba(0,200,255,0.40), rgba(255,215,0,0.35), rgba(176,38,255,0.40), rgba(0,200,255,0.40));
+            background-size: 200% auto;
+            animation: holoShine 5s linear infinite;
+            border-radius: 16px 16px 0 0;
+        }
+        .h-info-wrap { display: flex; gap: 20px; align-items: center; width: 100%; }
+        .h-info { flex: 1; }
+        .h-stat-row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; margin-bottom: 6px; color: var(--text-muted); }
+        
+        .h-money-box { display: flex; gap: 20px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 15px; width: 100%; justify-content: space-between; }
+        .money-item { display: flex; flex-direction: column; flex: 1; }
+        .money-label { font-size: 10px; color: var(--text-muted); font-family: 'Cinzel'; margin-bottom: 2px; letter-spacing: 1px; }
+
+        /* Prinsip Mutlak Lebar di Home */
+        .principle-home-box { background: linear-gradient(180deg, rgba(20,20,25,0.8), rgba(5,5,8,0.9)); border: 1px solid var(--accent-border); border-radius: 16px; padding: 35px 30px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 20px var(--accent-bg); display: flex; flex-direction: column; gap: 15px; align-items: center; justify-content: center; text-align: center; position: relative; }
+        .principle-home-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-grad); box-shadow: var(--accent-glow); }
+        .ph-title { font-family: 'Cinzel'; color: var(--text-muted); font-size: 12px; letter-spacing: 4px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+
+        /* --- 2. Manajemen Misi (Tasks Unlimited + VIP) --- */
+        .task-board { display: flex; flex-direction: column; gap: 24px; }
+        .vip-task-box {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 42, 85, 0.08));
+            border: 1px solid rgba(255, 215, 0, 0.4); border-radius: var(--radius-lg);
+            padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(255, 42, 85, 0.05);
+            position: relative; overflow: hidden;
+        }
+        .vip-task-box::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background: linear-gradient(90deg, transparent, #FFD700, transparent); }
+        .vip-title { font-family: 'Cinzel'; color: #FFD700; font-size: 18px; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255,215,0,0.5); display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,215,0,0.2); padding-bottom: 10px; }
+        
+        .task-card {
+            background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px;
+            padding: 16px 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; transition: 0.3s;
+            border-left: 4px solid transparent; cursor: pointer;
+        }
+        .task-card:hover { background: rgba(255,255,255,0.05); transform: translateX(5px); border-color: rgba(255,255,255,0.1); }
+        .task-card.prio-kritis { border-left-color: var(--color-danger); box-shadow: inset 40px 0 40px -40px rgba(255,42,85,0.2); }
+        .task-card.prio-tinggi { border-left-color: #FFD700; box-shadow: inset 40px 0 40px -40px rgba(255,215,0,0.2); }
+        .task-card.prio-normal { border-left-color: var(--color-info); }
+        .task-card.done { opacity: 0.3; filter: grayscale(1); border-left-color: #333; }
+        .task-card.done .tc-title { text-decoration: line-through; color: var(--text-muted); }
+        
+        .tc-check { width: 22px; height: 22px; border: 2px solid var(--text-muted); border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: 0.3s; flex-shrink: 0; }
+        .task-card:hover .tc-check { border-color: var(--accent-main); }
+        .tc-check.checked { background: var(--accent-main); border-color: var(--accent-main); box-shadow: var(--accent-glow); }
+        .tc-check.checked::after { content: '✓'; color: #000; font-weight: 900; font-size: 14px; }
+        .tc-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-main); }
+
+        /* Tombol Edit & Hapus pada Kartu Misi (Tambahan: sebelumnya misi tidak bisa diedit/dihapus) */
+        .tc-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+        .tc-edit, .tc-del { color: var(--text-muted); cursor: pointer; font-size: 15px; transition: 0.2s; }
+        .tc-edit:hover { color: var(--accent-main); transform: scale(1.15); }
+        .tc-del:hover { color: var(--color-danger); transform: scale(1.15); }
+
+        /* --- 3. Analitik Finansial (Charts) --- */
+        .chart-wrapper { width: 100%; height: 280px; position: relative; margin-top: 15px; background: rgba(0,0,0,0.3); border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); padding: 10px; }
+        canvas.fin-canvas { width: 100%; height: 100%; }
+        
+        .finance-summary { display: flex; justify-content: space-between; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); margin-bottom: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
+        .fs-box { text-align: center; flex: 1; border-right: 1px dashed rgba(255,255,255,0.1); }
+        .fs-box:last-child { border-right: none; }
+        .fs-label { font-size: 11px; color: var(--text-muted); font-family: 'Cinzel'; margin-bottom: 5px; }
+        .fs-val { font-size: 22px; font-weight: bold; font-family: var(--font-mono); }
+
+        .ledger-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+        .ledger-table th { text-align: left; padding: 15px 12px; border-bottom: 1px solid var(--accent-border); color: var(--accent-main); font-family: 'Cinzel'; letter-spacing: 1px; }
+        .ledger-table td { padding: 15px 12px; border-bottom: 1px solid var(--glass-border); color: var(--text-main); font-family: var(--font-mono); }
+
+        /* --- 4. Target Visi (Goals & Advanced Deadlines) --- */
+        .goal-column { display: flex; flex-direction: column; gap: 15px; }
+        .goal-header { font-family: 'Cinzel'; font-size: 16px; color: var(--text-main); text-align: center; padding-bottom: 15px; border-bottom: 2px dashed rgba(255,255,255,0.1); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .goal-card { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 20px; position: relative; transition: 0.3s; display: flex; flex-direction: column; gap: 12px; }
+        .goal-card:hover { border-color: var(--accent-main); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
+        .gc-text { font-size: 15px; line-height: 1.5; color: var(--text-main); font-weight: 500; }
+        
+        .gc-timer { font-family: var(--font-mono); font-size: 11px; color: var(--color-warning); background: rgba(255,171,0,0.1); padding: 5px 10px; border-radius: 4px; display: inline-block; align-self: flex-start; border: 1px solid rgba(255,171,0,0.3); }
+        .gc-prog-wrap { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; cursor: pointer; position: relative; margin-top: 5px; }
+        .gc-prog-fill { height: 100%; background: var(--color-info); transition: width 0.3s; box-shadow: 0 0 10px var(--color-info); }
+        .gc-prog-text { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); text-align: right; margin-top: -8px; display: flex; justify-content: space-between; }
+
+        .gc-del { position: absolute; top: 15px; right: 15px; color: var(--text-muted); cursor: pointer; font-size: 16px; opacity: 0; transition: 0.2s; }
+        .goal-card:hover .gc-del { opacity: 1; }
+        .gc-del:hover { color: var(--color-danger); }
+
+        /* --- 5. Matriks Waktu (Jadwal Interaktif Harian) --- */
+        .schedule-list { display: flex; flex-direction: column; gap: 12px; position: relative; padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 10px; }
+        .sch-item { position: relative; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 12px 15px; display: flex; align-items: center; gap: 15px; transition: 0.3s; }
+        .sch-item:hover { border-color: rgba(255,255,255,0.2); transform: translateX(5px); }
+        .sch-item.active-now { border-color: var(--accent-main); box-shadow: 0 0 20px rgba(255,215,0,0.15); background: rgba(255,215,0,0.05); animation: pulseSch 2s infinite; }
+        @keyframes pulseSch { 0% { box-shadow: 0 0 5px var(--accent-main); } 50% { box-shadow: 0 0 20px var(--accent-main); } 100% { box-shadow: 0 0 5px var(--accent-main); } }
+        
+        .sch-dot { position: absolute; left: -27px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--text-muted); border: 2px solid var(--bg-obsidian); transition: 0.3s; }
+        .sch-item.active-now .sch-dot { background: var(--accent-main); box-shadow: var(--accent-glow); transform: translateY(-50%) scale(1.3); }
+        
+        .sch-time { font-family: var(--font-mono); font-size: 13px; font-weight: bold; color: var(--text-muted); min-width: 100px; }
+        .sch-item.active-now .sch-time { color: var(--accent-main); text-shadow: var(--accent-glow); }
+        .sch-emoji { font-size: 22px; }
+        .sch-title { font-size: 14px; font-weight: 600; color: var(--text-main); flex: 1; }
+        .sch-del { color: var(--text-muted); cursor: pointer; font-size: 16px; opacity: 0.5; transition: 0.2s; }
+        .sch-item:hover .sch-del { opacity: 1; }
+        .sch-del:hover { color: var(--color-danger); }
+
+        /* --- 6. Pohon Semantik (Akar, Batang, Daun) --- */
+        .semantic-container { padding: 40px 20px; overflow-x: auto; min-height: 450px; display: flex; justify-content: center; }
+        .tree-node { background: rgba(5, 2, 16, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; margin: 15px auto; position: relative; text-align: center; min-width: 180px; z-index: 2; transition: 0.3s; box-shadow: 0 5px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .tree-node:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12); }
+        .tree-node.root { border-color: rgba(255,42,85,0.6); box-shadow: 0 0 20px rgba(255,42,85,0.12), inset 0 1px 0 rgba(255,80,80,0.08); }
+        .tree-node.trunk { border-color: rgba(255,171,0,0.55); box-shadow: 0 0 15px rgba(255,171,0,0.10), inset 0 1px 0 rgba(255,171,0,0.08); }
+        .tree-node.leaf { border-color: rgba(0,230,118,0.5); box-shadow: 0 0 12px rgba(0,230,118,0.10), inset 0 1px 0 rgba(0,230,118,0.07); }
+        .tree-node.mastered { opacity: 0.4; border-style: dashed; }
+        
+        .node-type { font-size: 10px; font-family: 'Cinzel'; opacity: 0.8; letter-spacing: 2px; }
+        .node-text { font-size: 15px; font-weight: 600; }
+        .node-actions { display: flex; gap: 10px; margin-top: 5px; opacity: 0; transition: 0.2s; }
+        .tree-node:hover .node-actions { opacity: 1; }
+        .n-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .n-btn:hover { background: var(--accent-main); color: #000; }
+        .n-btn.btn-del:hover { background: var(--color-danger); color: #fff; border-color: var(--color-danger); }
+        
+        .tree-children { display: flex; justify-content: center; gap: 30px; position: relative; padding-top: 30px; }
+        .tree-wrapper { display: flex; flex-direction: column; align-items: center; position: relative; }
+        /* Connectors */
+        .tree-children .tree-wrapper::before { content: ''; position: absolute; top: -30px; left: 50%; width: 2px; height: 30px; background: rgba(255,255,255,0.2); transform: translateX(-50%); }
+        .tree-children .tree-wrapper:first-child::after { content: ''; position: absolute; top: -30px; left: 50%; width: 50%; height: 2px; background: rgba(255,255,255,0.2); }
+        .tree-children .tree-wrapper:last-child::after { content: ''; position: absolute; top: -30px; right: 50%; width: 50%; height: 2px; background: rgba(255,255,255,0.2); }
+        .tree-children .tree-wrapper:only-child::after { display: none; }
+        .tree-children .tree-wrapper:not(:first-child):not(:last-child)::after { content: ''; position: absolute; top: -30px; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.2); }
+        .tree-node::after { content: ''; position: absolute; bottom: -15px; left: 50%; width: 2px; height: 15px; background: rgba(255,255,255,0.2); transform: translateX(-50%); }
+        .tree-node:last-child::after { display: none; }
+
+        /* --- 7. Jurnal, Analitik, & Catatan --- */
+        .tab-headers { display: flex; gap: 15px; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; overflow-x: auto; }
+        .tab-btn { background: none; border: none; color: var(--text-muted); font-family: 'Cinzel'; font-size: 14px; cursor: pointer; padding: 10px 15px; transition: 0.3s; position: relative; white-space: nowrap; }
+        .tab-btn:hover { color: var(--text-main); }
+        .tab-btn.active { color: var(--accent-main); text-shadow: var(--accent-glow); font-weight: 700; }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -16px; left: 0; width: 100%; height: 2px; background: var(--accent-main); box-shadow: var(--accent-glow); }
+        .tab-content { display: none; animation: fadeSlideUp 0.4s ease; }
+        .tab-content.active { display: block; }
+        
+        .eval-stats { display: flex; gap: 20px; margin-bottom: 25px; }
+        .es-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px; text-align: center; }
+        .es-val { font-size: 28px; font-family: var(--font-mono); color: var(--accent-main); font-weight: bold; margin-bottom: 5px; text-shadow: var(--accent-glow); }
+
+        .log-item { margin-bottom: 25px; position: relative; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; }
+        .log-item::before { content:''; position:absolute; left:-6px; top:5px; width:10px; height:10px; border-radius:50%; background: var(--accent-main); box-shadow: var(--accent-glow); }
+        .log-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
+        .log-q { font-size: 15px; color: var(--accent-main); margin-bottom: 8px; font-style: italic; }
+        .log-a { font-size: 14px; color: var(--text-main); line-height: 1.6; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.02); }
+
+        .note-card { background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 10px; padding: 20px; margin-bottom: 15px; position: relative; cursor: pointer; transition: 0.3s; }
+        .note-card:hover { border-color: var(--accent-main); transform: translateX(5px); }
+        .note-text { font-size: 14px; line-height: 1.6; color: var(--text-main); margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .note-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+        .note-del { position: absolute; top: 15px; right: 15px; cursor: pointer; color: var(--text-muted); transition: 0.2s; font-size: 16px; }
+        .note-del:hover { color: var(--color-danger); }
+
+        /* --- 8. Prinsip & Nilai (Hukum Mutlak) --- */
+        .law-container { display: flex; flex-direction: column; gap: 24px; counter-reset: law-counter; }
+        .law-card {
+            background: linear-gradient(180deg, rgba(15,15,20,0.9), rgba(5,5,8,0.9));
+            border: 1px solid rgba(255,255,255,0.05); border-top: 3px solid var(--accent-main);
+            border-radius: 16px; padding: 40px 30px; position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 15px 30px rgba(255,255,255,0.02);
+            transition: 0.3s;
+        }
+        .law-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 15px 30px rgba(255,255,255,0.05); border-top-color: #fff; }
+        .law-card::before {
+            counter-increment: law-counter; content: "PRINSIP " counter(law-counter) ".";
+            position: absolute; top: -12px; left: 30px; background: var(--bg-obsidian);
+            padding: 0 15px; font-family: 'Cinzel'; font-size: 14px; color: var(--accent-main); letter-spacing: 2px; font-weight: bold; border: 1px solid var(--accent-main); border-radius: 20px; box-shadow: var(--accent-glow);
+        }
+        .law-text { font-size: 20px; color: #fff; text-align: center; line-height: 1.6; letter-spacing: 1px; text-transform: uppercase; font-family: 'Cinzel'; }
+        .law-del { position: absolute; top: 15px; right: 15px; color: var(--text-muted); cursor: pointer; opacity: 0; transition: 0.2s; font-size: 18px; }
+        .law-card:hover .law-del { opacity: 1; }
+
+        /* ════════════════════════════════════════════════════════════════════════
+           [ MODALS & ALERTS ]
+           ════════════════════════════════════════════════════════════════════════ */
+        .modal-wrap { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; padding: 20px; }
+        .modal-wrap.active { display: flex; opacity: 1; }
+        .modal-content { background: var(--bg-obsidian); border: 1px solid var(--accent-main); border-radius: 16px; width: 100%; max-width: 500px; box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 0 1px var(--glass-border); transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; flex-direction: column; max-height: 90vh; }
+        .modal-wrap.active .modal-content { transform: scale(1) translateY(0); }
+        .m-head { padding: 20px 24px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); }
+        .m-title { font-family: 'Cinzel'; font-size: 18px; color: var(--accent-main); letter-spacing: 1px; }
+        .m-close { background: none; border: none; color: var(--text-muted); cursor: pointer; transition: 0.2s; }
+        .m-close svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+        .m-close:hover { color: var(--color-danger); }
+        .m-body { padding: 24px; overflow-y: auto; }
+        .m-foot { padding: 16px 24px; border-top: 1px solid var(--glass-border); display: flex; justify-content: flex-end; gap: 12px; background: rgba(0,0,0,0.5); }
+
+        /* Toast Notifications */
+        #toast-zone { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
+        .toast { background: rgba(15,15,20,0.95); border: 1px solid var(--glass-border); border-left: 4px solid var(--accent-main); padding: 16px 24px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.7); display: flex; align-items: center; gap: 15px; font-weight: 500; font-size: 14px; color: #fff; animation: slideInRight 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; min-width: 280px; }
+        .toast.danger { border-left-color: var(--color-danger); } .toast.success { border-left-color: var(--color-success); }
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* Level Up Cinematic */
+        #lvl-up-overlay { position: fixed; inset: 0; background: radial-gradient(circle, var(--accent-bg) 0%, rgba(0,0,0,0.95) 80%); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+        #lvl-up-overlay.active { display: flex; animation: fadeIn 1s forwards; }
+        .lvl-text { font-family: 'Cinzel'; font-size: 80px; color: transparent; -webkit-text-stroke: 2px var(--accent-main); text-shadow: var(--accent-glow); letter-spacing: 10px; margin-bottom: 10px; animation: pulseGlow 2s infinite alternate; text-align: center; }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes pulseGlow { 0% { text-shadow: 0 0 20px var(--accent-main); } 100% { text-shadow: 0 0 50px var(--accent-main), 0 0 80px var(--accent-main); } }
+
+        /* ════════════════════════════════════════════════════════════════════════
+           [ RESPONSIVE MOBILE ]
+           ════════════════════════════════════════════════════════════════════════ */
+        #mobile-nav { display: none; }
+        @media (max-width: 1024px) {
+            .grid { grid-template-columns: 1fr; gap: 16px; }
+            .col-12, .col-8, .col-6, .col-5, .col-7, .col-4, .col-3 { grid-column: span 1; }
+            #sidebar { display: none; }
+            #topbar { padding: 0 20px; }
+            #content-area { padding: 20px; padding-bottom: calc(var(--header-h) + 20px); }
+            
+            #mobile-nav {
+                display: flex; position: fixed; bottom: 0; left: 0; width: 100%; height: var(--header-h);
+                background: rgba(10,10,15,0.98); border-top: 1px solid var(--glass-border);
+                z-index: 90; justify-content: space-around; align-items: center; padding-bottom: env(safe-area-inset-bottom);
+                backdrop-filter: blur(20px);
+            }
+            .m-nav-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); width: 16.6%; height: 100%; transition: 0.3s; cursor: pointer; }
+            .m-nav-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; fill: none; margin-bottom: 4px; transition: 0.3s; }
+            .m-nav-btn span { font-size: 10px; font-weight: 500; font-family: 'Inter'; }
+            .m-nav-btn.active { color: var(--accent-main); transform: translateY(-3px); }
+            .m-nav-btn.active svg { filter: drop-shadow(var(--accent-glow)); stroke-width: 2; }
+
+            /* PERBAIKAN: Panel "Lainnya" agar semua menu tetap bisa diakses di mobile/landscape */
+            .mobile-more-panel {
+                display: none; position: fixed; left: 12px; right: 12px; bottom: calc(var(--header-h) + 10px);
+                background: rgba(10,10,15,0.98); border: 1px solid var(--glass-border); border-radius: 14px;
+                backdrop-filter: blur(20px); padding: 10px; z-index: 95; flex-direction: column; gap: 4px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.6); max-height: 60vh; overflow-y: auto;
+            }
+            .mobile-more-panel.open { display: flex; }
+            
+            #toast-zone { bottom: calc(var(--header-h) + 15px); right: 15px; left: 15px; align-items: center; }
+            .toast { width: 100%; justify-content: center; min-width: 0; }
+            .hero-stats { flex-direction: column; text-align: center; }
+            .h-money-box { flex-direction: column; gap: 10px; border-left: none; border-top: 1px dashed rgba(255,255,255,0.1); padding-left: 0; padding-top: 15px; margin-top: 10px; width: 100%; }
+            .h-info-wrap { flex-direction: column; }
+            .slide-banner { display: block; width: 100%; border-left: none; padding-left: 0; margin-left: 0; margin-top: 10px; } /* Diperbaiki: tetap tampil di mobile, pindah ke baris baru */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- [ BACKGROUND MATRIX CANVAS ] -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- [ GLOBAL ALERTS & CINEMATICS ] -->
+    <div id="toast-zone"></div>
+    
+    <div id="lvl-up-overlay">
+        <div class="lvl-text">LEVEL UP</div>
+        <div class="mono txt-accent" style="font-size: 20px; letter-spacing: 4px; margin-bottom: 40px;" id="lu-desc">Kapasitas Sistem Meningkat</div>
+        <button class="btn btn-accent" style="font-size: 15px; padding: 12px 30px;" onclick="UI.hideLevelUp()">KONSOLIDASI</button>
+    </div>
+
+    <!-- [ MAIN LAYOUT ] -->
+    <div id="layout-core">
+        
+        <!-- SIDEBAR DESKTOP -->
+        <aside id="sidebar">
+            <div class="brand-zone">
+                <div class="avatar-box-square">
+                    <span id="sidebar-avatar">☯</span>
+                    <div class="avatar-corner-icon">☯</div>
+                </div>
+                <div class="brand-info" style="margin-left: 15px;">
+                    <h1 id="sb-name" class="text-hologram" style="font-size: 18px; letter-spacing: 1px; font-family: 'Cinzel'; margin-bottom: 2px;">Admin</h1>
+                    <p style="font-size: 10px; color: var(--accent-main); font-family: var(--font-mono); letter-spacing: 2px;">APEX OS v15</p>
+                </div>
+            </div>
+            
+            <!-- SVG Definitions for Icons -->
+            <svg style="display:none;">
+                <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+                <symbol id="i-task" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></symbol>
+                <symbol id="i-chart" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></symbol>
+                <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></symbol>
+                <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></symbol>
+                <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 22v-8M12 14C8 14 4 10 4 6c0-2.5 2-4 4-4 1.5 0 2.5 1 4 2 1.5-1 2.5-2 4-2 2 0 4 1.5 4 4 0 4-4 8-8 8z"></path><circle cx="12" cy="4" r="2"></circle></symbol>
+                <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></symbol>
+                <symbol id="i-law" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="15" y2="17"></line></symbol>
+                <symbol id="i-set" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0 2.83l.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></symbol>
+            </svg>
+
+            <div class="nav-list">
+                <div class="nav-item active" data-nav="home"><svg><use href="#i-home"></use></svg> Titik Pusat</div>
+                <div class="nav-item" data-nav="tasks"><svg><use href="#i-task"></use></svg> Manajemen Misi</div>
+                <div class="nav-item" data-nav="finance"><svg><use href="#i-chart"></use></svg> Analitik Finansial</div>
+                <div class="nav-item" data-nav="goals"><svg><use href="#i-target"></use></svg> Visi & Target</div>
+                <div class="nav-item" data-nav="timeblock"><svg><use href="#i-cal"></use></svg> Jadwal Harian</div>
+                <div class="nav-item" data-nav="semantic"><svg><use href="#i-tree"></use></svg> Pohon Ilmu</div>
+                <div class="nav-item" data-nav="eval"><svg><use href="#i-book"></use></svg> Jurnal & Catatan</div>
+                <div class="nav-item" data-nav="principles"><svg><use href="#i-law"></use></svg> Prinsip & Nilai</div>
+                <div class="nav-item" data-nav="settings"><svg><use href="#i-set"></use></svg> Konfigurasi OS</div>
+            </div>
+        </aside>
+
+        <!-- MAIN AREA -->
+        <main id="main-view">
+            
+            <!-- TOPBAR -->
+            <header id="topbar">
+                <div class="view-title-main" id="view-title-text">Titik Pusat</div>
+                <div style="display: flex; gap: 15px;">
+                    <button class="icon-btn" onclick="UI.openModal('modal-reset')" title="Format Sistem" style="background:transparent; border:none; color:var(--color-danger); cursor:pointer;">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- CONTENT SCROLL AREA -->
+            <div id="content-area">
+                
+                <!-- 1. HOME -->
+                <section id="view-home" class="view-pane active">
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+                        <div class="clock-display" id="realtime-clock" style="font-family: var(--font-mono); font-size: 16px; font-weight: bold; color: var(--accent-main); text-shadow: var(--accent-glow);">Memuat Waktu...</div>
+                        
+                        <!-- Header Banner Slider Teks Pengaturan -->
+                        <div class="slide-banner">
+                            <div class="slide-content text-slide-gold" id="home-marquee-display">"KEBERANIAN BUKAN BERARTI TIDAK TAKUT, TETAPI BERTINDAK MESKIPUN TAKUT."</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid">
+                        
+                        <div class="col-7" style="display: flex; flex-direction: column; gap: 24px;">
+                            <!-- Profil & XP (Kanan Atas) -->
+                            <div class="glass-panel hero-stats" style="flex-direction: column; align-items: stretch; padding: 25px;">
+                                <div class="h-info-wrap" style="display: flex; gap: 20px; align-items: center; margin-bottom: 25px;">
+                                    <div class="avatar-box-square" id="dh-icon">☯</div>
+                                    <div class="h-info">
+                                        <div style="display:flex; align-items:center; gap:10px; margin-bottom: 8px; flex-wrap:wrap;">
+                                            <h2 style="font-size: 24px;" class="text-hologram" id="dh-name">Sistem Aktif</h2>
+                                            <span class="badge bdg-low" style="font-size: 11px; color:var(--accent-main); border-color:var(--accent-main); white-space:nowrap;">Lv.<span id="dh-lvl">1</span></span>
+                                        </div>
+                                        <div class="h-stat-row"><span>EXPERIENCE (XP)</span><span id="dh-xp-val">0/1000</span></div>
+                                        <div class="bar-wrap" style="margin-bottom: 12px;"><div class="bar-fill bg-hologram" id="dh-xp-bar" style="width:0%"></div></div>
+                                        
+                                        <div class="h-stat-row"><span class="txt-danger">VITALITY (HP)</span><span id="dh-hp-val">100/100</span></div>
+                                        <div class="bar-wrap"><div class="bar-fill bg-hp" id="dh-hp-bar" style="width:100%"></div></div>
+                                    </div>
+                                </div>
+                                <div class="h-money-box">
+                                    <div class="money-item">
+                                        <span class="money-label">ASET LIKUID (IN)</span>
+                                        <span class="font-mono txt-success" style="font-size: 18px; font-weight: bold;" id="dh-money-in">Rp 0</span>
+                                    </div>
+                                    <div class="money-item">
+                                        <span class="money-label">PENGELUARAN (OUT)</span>
+                                        <span class="font-mono txt-danger" style="font-size: 18px; font-weight: bold;" id="dh-money-out">Rp 0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-5" style="display: flex; flex-direction: column; gap: 24px;">
+                            <!-- Mini Timeblock (Today) di Kiri -->
+                            <div class="glass-panel" style="flex: 1;">
+                                <div class="panel-head"><h3 class="panel-title">Jadwal Harian</h3></div>
+                                <div id="dh-time-list" style="max-height: 350px; overflow-y: auto;">
+                                    <!-- Injected JS -->
+                                </div>
+                                <button class="btn btn-accent" style="width: 100%; margin-top: 15px; font-size: 12px;" onclick="Router.nav('timeblock')">Atur Jadwal</button>
+                            </div>
+                        </div>
+
+                        <!-- Prinsip Mutlak Lebar di Bawah -->
+                        <div class="col-12 glass-panel principle-home-box">
+                            <div class="ph-title">HUKUM MUTLAK UTAMA</div>
+                            <div id="home-principle-display" class="text-principle-gold" style="font-size: 24px; text-align: center; line-height: 1.6;">
+                                <!-- Injected JS -->
+                            </div>
+                            <button class="btn" style="font-size: 11px; margin-top:20px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--text-muted);" onclick="Router.nav('principles')">Kelola Prinsip & Nilai</button>
+                        </div>
+
+                        <!-- Quick Tasks Paling Bawah -->
+                        <div class="col-12 glass-panel">
+                            <div class="panel-head">
+                                <h3 class="panel-title">Tugas Mendesak Hari Ini</h3>
+                                <button class="btn btn-accent" style="padding: 6px 12px; font-size:11px;" onclick="Router.nav('tasks')">Manajemen Penuh</button>
+                            </div>
+                            <div id="dash-task-list"></div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- 2. TASKS (Manajemen Misi) -->
+                <section id="view-tasks" class="view-pane">
+                    <div class="panel-head" style="border:none;">
+                        <h2 style="font-size: 24px; font-family: 'Cinzel';">Manajemen Misi Terpusat</h2>
+                        <button class="btn btn-accent" onclick="Tasks.openAdd()">➕ Tambah Misi</button>
+                    </div>
+                    
+                    <div class="task-board">
+                        <!-- VIP Tasks Box -->
+                        <div class="vip-task-box" id="vip-task-container">
+                            <div class="vip-title">👑 Misi Prioritas Tertinggi (Wajib Selesai)</div>
+                            <div id="q-vip-list"></div>
+                        </div>
+
+                        <!-- Normal Tasks Box -->
+                        <div class="glass-panel" style="background: rgba(0,0,0,0.3);">
+                            <div class="panel-head"><h3 class="panel-title">Misi Rutin & Normal</h3></div>
+                            <div id="q-normal-list"></div>
+                        </div>
+
+                        <div class="glass-panel" style="background: rgba(0,0,0,0.15);">
+                            <div class="panel-head"><h3 class="panel-title text-muted" style="text-shadow:none;">Arsip Penyelesaian (Terbaru)</h3></div>
+                            <div id="q-history-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. FINANCE (Analitik Finansial Ganda) -->
+                <section id="view-finance" class="view-pane">
+                    <div class="panel-head" style="border:none;">
+                        <h2 style="font-size: 24px; font-family: 'Cinzel';">Analitik Finansial</h2>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn" style="border-color: var(--color-success); color: var(--color-success);" onclick="Finance.openModal('IN')">➕ Pemasukan</button>
+                            <button class="btn btn-danger" onclick="Finance.openModal('OUT')">➖ Pengeluaran</button>
+                        </div>
+                    </div>
+                    
+                    <div class="finance-summary">
+                        <div class="fs-box">
+                            <div class="fs-label">TOTAL PEMASUKAN</div>
+                            <div class="fs-val txt-success" id="fs-in">Rp 0</div>
+                        </div>
+                        <div class="fs-box">
+                            <div class="fs-label">TOTAL PENGELUARAN</div>
+                            <div class="fs-val txt-danger" id="fs-out">Rp 0</div>
+                        </div>
+                        <div class="fs-box">
+                            <div class="fs-label">NET ASSET (SALDO)</div>
+                            <div class="fs-val txt-accent" id="fs-net">Rp 0</div>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="col-8 glass-panel">
+                            <div class="panel-head"><h3 class="panel-title">Tren Arus Kas (Net Worth)</h3></div>
+                            <div class="chart-wrapper"><canvas class="fin-canvas" id="chart-line"></canvas></div>
+                        </div>
+                        
+                        <div class="col-4 glass-panel">
+                            <div class="panel-head"><h3 class="panel-title">Distribusi Pengeluaran</h3></div>
+                            <div class="chart-wrapper"><canvas class="fin-canvas" id="chart-bar"></canvas></div>
+                        </div>
+
+                        <div class="col-12 glass-panel">
+                            <div class="panel-head"><h3 class="panel-title">Buku Besar (Ledger)</h3></div>
+                            <div style="overflow-x: auto;">
+                                <table class="ledger-table">
+                                    <thead><tr><th>Tanggal</th><th>Kategori/Keterangan</th><th>Tipe</th><th style="text-align:right;">Nominal (Rp)</th></tr></thead>
+                                    <tbody id="f-ledger-list"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. GOALS (Visi & Target Timeline) -->
+                <section id="view-goals" class="view-pane">
+                    <div class="panel-head" style="border:none; margin-bottom: 30px;">
+                        <h2 style="font-size: 26px; font-family: 'Cinzel';">Visi & Target Kehidupan</h2>
+                        <button class="btn btn-accent" onclick="UI.openModal('modal-goal')">➕ Tanam Target</button>
+                    </div>
+                    
+                    <p class="text-muted" style="text-align: center; margin-bottom: 30px; font-size: 15px;">Setiap visi besar butuh langkah nyata. Tentukan deadline dan pantau progres garis perjalanan Anda.</p>
+
+                    <!-- Goal Recommendation Panel -->
+                    <div class="glass-panel" style="margin-bottom: 25px; border-color: rgba(0,191,255,0.3); background: linear-gradient(135deg, rgba(0,191,255,0.04), rgba(150,60,255,0.03));">
+                        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+                            <span style="font-size:18px;">🧭</span>
+                            <h3 style="font-family:'Cinzel'; color:var(--color-info); font-size:13px; letter-spacing:1.5px; text-shadow: 0 0 10px rgba(0,191,255,0.4);">REKOMENDASI SISTEM UNTUK VISI ANDA</h3>
+                        </div>
+                        <div id="goal-recommendation-list" style="display:flex; flex-direction:column; gap:8px;">
+                            <div style="font-size:13px; color:var(--text-muted); font-style:italic;">Menganalisis status visi Anda...</div>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="col-6 goal-column">
+                            <div class="goal-header txt-accent">JANGKA PANJANG (VISI BESAR)</div>
+                            <div id="goal-long-list"></div>
+                        </div>
+                        <div class="col-6 goal-column">
+                            <div class="goal-header" style="color: var(--color-info);">JANGKA PENDEK (FOKUS SAAT INI)</div>
+                            <div id="goal-short-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. TIMEBLOCK (Jadwal Harian Visual) -->
+                <section id="view-timeblock" class="view-pane">
+                    <div class="panel-head" style="border:none;">
+                        <h2 style="font-size: 24px; font-family: 'Cinzel';">Jadwal Harian</h2>
+                        <button class="btn btn-accent" onclick="UI.openModal('modal-time')">➕ Tambah Jadwal</button>
+                    </div>
+
+                    <div class="glass-panel" style="max-width: 800px; margin: 0 auto;">
+                        <p class="text-muted" style="text-align: center; margin-bottom: 30px;">Daftar aktivitas Anda hari ini. Jadwal yang sedang berlangsung akan menyala terang.</p>
+                        
+                        <div class="schedule-list" id="timeblock-render-area">
+                            <!-- Injected JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. SEMANTIC TREE (Pohon Ilmu) -->
+                <section id="view-semantic" class="view-pane">
+                    <div class="panel-head" style="border:none; margin-bottom: 30px;">
+                        <h2 style="font-size: 24px; font-family: 'Cinzel';">Pohon Semantik Pengetahuan</h2>
+                        <div style="display: flex; gap:10px;">
+                            <button class="btn" onclick="UI.openModal('modal-vault')">Brankas Jejak Ilmu</button>
+                            <button class="btn btn-accent" onclick="UI.openModal('modal-semantic')">➕ Tambah Ilmu</button>
+                        </div>
+                    </div>
+                    
+                    <p class="text-muted" style="text-align: center; margin-bottom: 20px; font-size: 14px;">Pecah apa yang Anda pelajari hari ini. <br><span style="color:var(--color-danger)">Akar (Fondasi)</span> ➔ <span style="color:var(--color-warning)">Batang (Konsep Pokok)</span> ➔ <span style="color:var(--color-success)">Dedaunan (Detail)</span></p>
+
+                    <div class="glass-panel">
+                        <div class="semantic-container" id="semantic-tree-render">
+                            <!-- Visual Tree Injected via JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. EVALUATION (Jurnal, Catatan Pribadi & Evaluasi) -->
+                <section id="view-eval" class="view-pane">
+                    <div class="tab-headers">
+                        <button class="tab-btn active" onclick="Eval.switchTab('daily')">Jejak Waktu (Jurnal)</button>
+                        <button class="tab-btn" onclick="Eval.switchTab('weekly')">Evaluasi Mingguan</button>
+                        <button class="tab-btn" onclick="Eval.switchTab('notes')">Catatan Pribadi</button>
+                    </div>
+
+                    <!-- Daily Tab -->
+                    <div id="tab-daily" class="tab-content active">
+                        <div class="grid" style="margin-bottom: 25px;">
+                            <div class="col-4 eval-stats" style="margin-bottom: 0; flex-direction:column; gap:10px;">
+                                <div class="es-box"><div class="es-val" id="es-d-count">0</div><div class="text-muted" style="font-size:11px;">Total Jurnal</div></div>
+                                <div class="es-box"><div class="es-val" id="es-d-streak">0</div><div class="text-muted" style="font-size:11px;">Refleksi Beruntun</div></div>
+                            </div>
+                            <div class="col-8 glass-panel" style="padding: 15px;">
+                                <h3 style="font-size:12px; font-family:'Cinzel'; color:var(--accent-main); margin-bottom:10px; text-align:center;">Kalender Konsistensi Jurnal</h3>
+                                <div id="journal-calendar-container" style="width:100%; min-height:100px;"></div>
+                                <div style="border-top:1px solid rgba(255,255,255,0.05); margin-top:12px; padding-top:10px;">
+                                    <h3 style="font-size:10px; font-family:'Cinzel'; color:var(--text-muted); margin-bottom:8px; text-align:center; letter-spacing:1.5px;">— GARIS PERJALANAN SEJAK AWAL PENCATATAN —</h3>
+                                    <div style="width:100%; height:68px; position:relative;"><canvas id="journey-chart-canvas"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Titik Awal Kultivasi -->
+                        <div style="text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--text-muted); margin-bottom:30px;">
+                            Titik Awal Perjalanan OS: <span id="start-date-display" class="txt-accent">--</span> (<span id="start-days-display">0</span> Hari Berlalu)
+                        </div>
+
+                        <div class="glass-panel" style="margin-bottom: 30px; text-align: center; border-color:var(--accent-main);">
+                            <div class="text-principle-gold" id="daily-q" style="font-size: 22px; font-style: italic; line-height: 1.6; margin-bottom: 25px; text-transform:none;">"Apa satu keputusan kecil hari ini yang paling Anda sesali?"</div>
+                            <textarea id="daily-ans" class="input-box" rows="4" style="resize:vertical;" placeholder="Tuliskan kejujuran Anda di sini..."></textarea>
+                            <button class="btn btn-accent" style="width: 100%; padding: 15px;" onclick="Eval.submitDaily()">Simpan Refleksi Harian (+15 XP)</button>
+                            <button class="btn" style="margin-top: 10px; border:none; background:transparent;" onclick="Eval.randomizeQ()">Ganti Pertanyaan Diri</button>
+                        </div>
+                        
+                        <h3 style="font-family: 'Cinzel'; color: var(--accent-main);">Riwayat Jurnal Refleksi</h3>
+                        <div class="history-log" id="daily-history"></div>
+                    </div>
+
+                    <!-- Weekly Tab -->
+                    <div id="tab-weekly" class="tab-content">
+                        <div class="eval-stats">
+                            <div class="es-box" style="border-color: var(--color-info);"><div class="es-val" style="color: var(--color-info);" id="es-w-count">0</div><div class="text-muted" style="font-size:11px;">Total Sidang Mingguan</div></div>
+                        </div>
+                        <div class="glass-panel" style="margin-bottom: 30px; border-color: var(--color-info);">
+                            <h3 style="font-family: 'Cinzel'; color: var(--color-info); margin-bottom: 20px;">Sidang Mingguan</h3>
+                            
+                            <label class="text-muted" style="display:block; margin-bottom:5px;">1. Apa yang berjalan baik minggu ini?</label>
+                            <textarea id="we-good" class="input-box" rows="2"></textarea>
+                            
+                            <label class="text-muted" style="display:block; margin-bottom:5px;">2. Apa yang harus SAYA perbaiki (Kekurangan)?</label>
+                            <textarea id="we-bad" class="input-box" rows="2"></textarea>
+                            
+                            <label class="text-muted" style="display:block; margin-bottom:5px;">3. Target Absolut untuk minggu depan?</label>
+                            <input type="text" id="we-next" class="input-box">
+                            
+                            <button class="btn" style="width: 100%; background:var(--color-info); color:#000; font-weight:bold; border:none; padding: 15px;" onclick="Eval.submitWeekly()">Kunci Evaluasi Mingguan (+50 XP)</button>
+                        </div>
+                        <h3 style="font-family: 'Cinzel'; color: var(--color-info);">Riwayat Evaluasi Mingguan</h3>
+                        <div class="history-log" id="weekly-history"></div>
+                    </div>
+
+                    <!-- Personal Notes Tab -->
+                    <div id="tab-notes" class="tab-content">
+                        <div class="glass-panel" style="margin-bottom: 30px;">
+                            <h3 style="font-family: 'Cinzel'; color: var(--accent-main); margin-bottom: 20px;">Catatan Pribadi</h3>
+                            <textarea id="note-text" class="input-box" rows="4" placeholder="Tuliskan ide, anomali, strategi rahasia yang melintasi pikiran Anda..."></textarea>
+                            <button class="btn btn-accent" style="width: 100%; padding: 12px;" onclick="Notes.save()">Simpan ke Arsip Catatan</button>
+                        </div>
+                        <h3 style="font-family: 'Cinzel'; color: var(--accent-main); margin-bottom: 15px;">Arsip Catatan Pribadi</h3>
+                        <div id="notes-list"></div>
+                    </div>
+                </section>
+
+                <!-- 8. PRINCIPLES (Prinsip & Nilai) -->
+                <section id="view-principles" class="view-pane">
+                    <div class="panel-head" style="border:none; margin-bottom: 30px;">
+                        <h2 style="font-size: 26px; font-family: 'Cinzel';">Prinsip & Nilai Saya</h2>
+                        <button class="btn btn-accent" onclick="UI.openModal('modal-principle')">➕ Pahat Prinsip Baru</button>
+                    </div>
+
+                    <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 40px;">
+                        <p class="text-muted" style="font-size: 15px;">Aturan mutlak yang memandu setiap keputusan. Mereka tidak dapat dinegosiasikan.</p>
+                    </div>
+
+                    <div class="law-container" id="principles-list">
+                        <!-- Injected JS -->
+                    </div>
+                </section>
+
+                <!-- 9. SETTINGS (Pengaturan OS) -->
+                <section id="view-settings" class="view-pane">
+                    <div class="panel-head" style="border:none;">
+                        <h2 style="font-size: 24px; font-family: 'Cinzel';">Konfigurasi Sistem OS</h2>
+                    </div>
+                    
+                    <div class="grid">
+                        <div class="col-6 glass-panel">
+                            <h3 class="panel-title" style="margin-bottom: 20px;">Identitas & Tampilan</h3>
+                            
+                            <label class="text-muted" style="font-size:12px; display:block; margin-bottom:5px;">Nama / Gelar</label>
+                            <input type="text" id="set-name" class="input-box" placeholder="Sistem Admin">
+                            
+                            <label class="text-muted" style="font-size:12px; display:block; margin-bottom:5px;">Teks Slide (Banner Home Atas)</label>
+                            <input type="text" id="set-marquee" class="input-box" placeholder="Teks yang berjalan di atas layar Home...">
+                            
+                            <label class="text-muted" style="font-size:12px; display:block; margin-bottom:5px;">Ikon Sudut Kotak Profil</label>
+                            <select id="set-icon" class="input-box">
+                                <option value="☯">☯ Yin Yang</option>
+                                <option value="🌌">🌌 Galaxy</option>
+                                <option value="👑">👑 Crown</option>
+                                <option value="👁️">👁️ The Eye</option>
+                                <option value="⚡">⚡ Lightning</option>
+                                <option value="⚛">⚛ Quantum</option>
+                            </select>
+
+                            <label class="text-muted" style="font-size:12px; display:block; margin-bottom:5px;">Tema UI Utama</label>
+                            <select id="set-theme" class="input-box">
+                                <option value="gold">Tycoon Gold (Emas Elegan)</option>
+                                <option value="kultivasi">Jade Green (Kultivasi Dao)</option>
+                                <option value="cyan">Cyber Cyan (Matrix Sci-Fi)</option>
+                                <option value="purple">Nebula Purple (Kosmik Mistis)</option>
+                                <option value="galaxy">Deep Rose (Galaxy Magenta)</option>
+                                <option value="quantum">Quantum Silver (Elegan Putih)</option>
+                                <option value="hologram">Hologram Quantum (Gradasi Ultra)</option>
+                            </select>
+                            
+                            <button class="btn btn-accent" onclick="Settings.save()">Terapkan Konfigurasi</button>
+                        </div>
+
+                        <div class="col-6 glass-panel">
+                            <h3 class="panel-title" style="margin-bottom: 20px;">Preferensi Sistem Lanjutan</h3>
+                            
+                            <div style="display:flex; align-items:center; margin-bottom:15px;">
+                                <label class="switch"><input type="checkbox" id="set-audio"><span class="slider"></span></label>
+                                <span style="font-size:14px; color: var(--text-main);">Efek Suara Kosmik (Web Audio API)</span>
+                            </div>
+                            
+                            <div style="display:flex; align-items:center; margin-bottom:15px;">
+                                <label class="switch"><input type="checkbox" id="set-eco"><span class="slider"></span></label>
+                                <span style="font-size:14px; color: var(--text-main);">Mode Hemat Energi (Matikan Animasi Latar)</span>
+                            </div>
+
+                            <div style="display:flex; align-items:center; margin-bottom:25px;">
+                                <label class="switch"><input type="checkbox" id="set-zodiac"><span class="slider"></span></label>
+                                <span style="font-size:14px; color: var(--text-main);">Simbol Zodiak di Latar (♈♉♊♌♐)</span>
+                            </div>
+
+                            <hr style="border:none; border-top:1px solid var(--glass-border); margin-bottom: 20px;">
+                            
+                            <label class="text-muted" style="font-size:12px; display:block; margin-bottom:10px;">Manajemen Data Relasional (JSON)</label>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn" style="flex:1;" onclick="Settings.export()">📥 Ekspor Data</button>
+                                <label class="btn" style="flex:1; cursor: pointer; justify-content:center;">
+                                    📤 Impor Data
+                                    <input type="file" id="import-file" style="display:none;" accept=".json" onchange="Settings.import(event)">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 glass-panel" style="border-color: rgba(255, 42, 85, 0.4); background: rgba(255, 42, 85, 0.05);">
+                            <h3 class="panel-title txt-danger" style="margin-bottom: 15px;">Zona Kehancuran (Factory Reset)</h3>
+                            <p class="text-main" style="font-size: 13px; margin-bottom: 20px;">Tindakan ini akan memformat seluruh memori penyimpanan lokal (Local Storage) Anda. Semua Progres, Keuangan, dan Catatan akan musnah selamanya.</p>
+                            <button class="btn btn-danger" onclick="UI.openModal('modal-reset')">HANCURKAN REALITAS INI</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+        
+        <!-- MOBILE BOTTOM NAV -->
+        <nav id="mobile-nav">
+            <div class="m-nav-btn active" data-nav="home"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Home</span></div>
+            <div class="m-nav-btn" data-nav="tasks"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><span>Misi</span></div>
+            <div class="m-nav-btn" data-nav="finance"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg><span>Uang</span></div>
+            <div class="m-nav-btn" data-nav="timeblock"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>Jadwal</span></div>
+            <div class="m-nav-btn" data-nav="eval"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg><span>Jurnal</span></div>
+            <div class="m-nav-btn" id="mobile-more-btn" onclick="document.getElementById('mobile-more-panel').classList.toggle('open')"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg><span>Lainnya</span></div>
+        </nav>
+
+        <!-- PERBAIKAN: Panel menu tambahan agar semua menu (Visi & Target, Pohon Ilmu, Prinsip & Nilai, Konfigurasi OS) tetap bisa diakses saat mobile/landscape -->
+        <div id="mobile-more-panel" class="mobile-more-panel">
+            <div class="nav-item" data-nav="goals" onclick="document.getElementById('mobile-more-panel').classList.remove('open')"><svg><use href="#i-target"></use></svg> Visi & Target</div>
+            <div class="nav-item" data-nav="semantic" onclick="document.getElementById('mobile-more-panel').classList.remove('open')"><svg><use href="#i-tree"></use></svg> Pohon Ilmu</div>
+            <div class="nav-item" data-nav="principles" onclick="document.getElementById('mobile-more-panel').classList.remove('open')"><svg><use href="#i-law"></use></svg> Prinsip & Nilai</div>
+            <div class="nav-item" data-nav="settings" onclick="document.getElementById('mobile-more-panel').classList.remove('open')"><svg><use href="#i-set"></use></svg> Konfigurasi OS</div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         [ OVERLAYS & MODALS SISTEM ]
+         ════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal-wrap" id="modal-global">
+        
+        <!-- Add Quest -->
+        <div class="modal-content" id="modal-task" style="display:none;">
+            <div class="m-head"><h3 class="m-title" id="mq-modal-title">Bentuk Misi Baru</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <input type="text" id="mq-title" class="input-box" placeholder="Deskripsi Misi (Cth: Deep Work Koding)">
+                <label style="color: var(--text-muted); font-size: 12px; margin-bottom: 5px; display: block;">Tingkat Prioritas</label>
+                <select id="mq-prio" class="input-box">
+                    <option value="Kritis">Kritis (Wajib Selesai Hari Ini) - Reward Tinggi</option>
+                    <option value="Tinggi">Tinggi (Sangat Penting)</option>
+                    <option value="Normal">Normal (Rutin)</option>
+                </select>
+                <p style="font-size: 11px; color: var(--color-danger); margin-top: -5px;">*Misi Kritis yang diabaikan hingga 00:00 akan mengurangi 30 HP otomatis.</p>
+            </div>
+            <div class="m-foot"><button class="btn" onclick="UI.closeModal()">Batal</button><button class="btn btn-accent" id="mq-save-btn" onclick="Tasks.save()">Segel Misi</button></div>
+        </div>
+
+        <!-- Add Finance -->
+        <div class="modal-content" id="modal-finance" style="display:none;">
+            <div class="m-head"><h3 class="m-title" id="mcf-title">Catat Transaksi</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <input type="number" id="mcf-amount" class="input-box" placeholder="Nominal Rp (Tanpa Titik)">
+                <label style="color: var(--text-muted); font-size: 12px; margin-bottom: 5px; display: block;">Kategori / Keterangan</label>
+                <input type="text" id="mcf-desc" class="input-box" placeholder="Cth: Gaji atau Ransum Makanan" list="cat-list">
+                <datalist id="cat-list"><option value="Pekerjaan / Bisnis"><option value="Makanan & Minuman"><option value="Transportasi"><option value="Edukasi"><option value="Hiburan"></datalist>
+                <input type="hidden" id="mcf-type">
+            </div>
+            <div class="m-foot"><button class="btn btn-accent" style="width: 100%;" onclick="Finance.save()">Konfirmasi Aliran</button></div>
+        </div>
+
+        <!-- Add Goal -->
+        <div class="modal-content" id="modal-goal" style="display:none;">
+            <div class="m-head"><h3 class="m-title">Tanam Target Baru</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <textarea id="mg-text" class="input-box" rows="2" placeholder="Deskripsikan target Anda secara spesifik..."></textarea>
+                <label style="color: var(--text-muted); font-size: 12px; margin-bottom: 5px; display: block;">Kategori Visi</label>
+                <select id="mg-type" class="input-box">
+                    <option value="long">Jangka Panjang (> 1 Tahun)</option>
+                    <option value="short">Jangka Pendek (Fokus Saat Ini)</option>
+                </select>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <label style="color: var(--text-muted); font-size: 12px; margin-bottom: 5px; display: block;">Tanggal Tenggat (Deadline)</label>
+                    <div>
+                        <span style="font-size:10px; color:var(--text-main); cursor:pointer; background:rgba(255,255,255,0.1); padding:4px 6px; border-radius:3px;" onclick="Goals.setRecDate(7)">+1 Mgg</span>
+                        <span style="font-size:10px; color:var(--text-main); cursor:pointer; background:rgba(255,255,255,0.1); padding:4px 6px; border-radius:3px;" onclick="Goals.setRecDate(30)">+1 Bln</span>
+                        <span style="font-size:10px; color:var(--text-main); cursor:pointer; background:rgba(255,255,255,0.1); padding:4px 6px; border-radius:3px;" onclick="Goals.setRecDate(365)">+1 Thn</span>
+                    </div>
+                </div>
+                <!-- Native browser calendar picker -->
+                <input type="date" id="mg-date" class="input-box" onclick="this.showPicker ? this.showPicker() : null">
+            </div>
+            <div class="m-foot"><button class="btn btn-accent" style="width: 100%;" onclick="Goals.save()">Simpan Target</button></div>
+        </div>
+
+        <!-- Add Timeblock -->
+        <div class="modal-content" id="modal-time" style="display:none;">
+            <div class="m-head"><h3 class="m-title">Alokasi Jadwal Harian</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <div style="display: flex; gap: 10px;">
+                    <input type="time" id="mt-start" class="input-box" style="flex:1;" onclick="this.showPicker ? this.showPicker() : null">
+                    <span style="display:flex; align-items:center; color:#555; padding-bottom:15px;">—</span>
+                    <input type="time" id="mt-end" class="input-box" style="flex:1;" onclick="this.showPicker ? this.showPicker() : null">
+                </div>
+                <input type="text" id="mt-title" class="input-box" placeholder="Kegiatan Utama (Cth: Deep Work Bisnis)">
+                <label style="color: var(--text-muted); font-size: 12px; margin-bottom: 5px; display: block;">Ikon Visual (Emoji Rekomendasi: 💻 🏋️ ☕ 📚 🧘)</label>
+                <input type="text" id="mt-emoji" class="input-box" placeholder="Ketik 1 Emoji (Cth: 💻)">
+            </div>
+            <div class="m-foot"><button class="btn btn-accent" style="width: 100%;" onclick="Timeblock.save()">Blokir Waktu</button></div>
+        </div>
+
+        <!-- Add Principle -->
+        <div class="modal-content" id="modal-principle" style="display:none;">
+            <div class="m-head"><h3 class="m-title">Pahat Prinsip Baru</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <textarea id="mp-text" class="input-box" rows="3" placeholder="Tuliskan aturan yang tidak boleh Anda langgar. Gunakan bahasa tegas."></textarea>
+            </div>
+            <div class="m-foot"><button class="btn btn-accent" style="width: 100%;" onclick="Principles.save()">Sahkan Prinsip</button></div>
+        </div>
+
+        <!-- Edit Semantic Node / Add Node -->
+        <div class="modal-content" id="modal-semantic" style="display:none;">
+            <div class="m-head"><h3 class="m-title">Manipulasi Pohon Ilmu</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <input type="hidden" id="ms-id-edit">
+                <input type="text" id="ms-text" class="input-box" placeholder="Topik Ilmu (Cth: Filsafat Stoik)">
+                
+                <div id="ms-add-only">
+                    <label style="color: var(--text-muted); font-size: 12px; margin-bottom: 5px; display: block;">Tanam di bagian mana?</label>
+                    <select id="ms-parent" class="input-box">
+                        <option value="root">-- Jadikan Akar Baru (Fondasi Utama) --</option>
+                        <!-- Injected JS Options -->
+                    </select>
+                    <select id="ms-type" class="input-box" style="margin-top: 10px;">
+                        <option value="trunk">Batang (Konsep Pokok)</option>
+                        <option value="leaf">Dedaunan (Detail Spesifik)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="m-foot">
+                <button class="btn" onclick="UI.closeModal()">Batal</button>
+                <button class="btn btn-accent" onclick="SemanticTree.save()">Simpan Ilmu</button>
+            </div>
+        </div>
+
+        <!-- Semantic Vault Review -->
+        <div class="modal-content" id="modal-vault" style="display:none;">
+            <div class="m-head"><h3 class="m-title">Brankas Jejak Ilmu</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body" id="vault-list-container">
+                <!-- JS Injected -->
+            </div>
+            <div class="m-foot"><button class="btn" onclick="UI.closeModal()">Tutup Brankas</button></div>
+        </div>
+
+        <!-- Note Detail Modal -->
+        <div class="modal-content" id="modal-note-detail" style="display:none;">
+            <div class="m-head"><h3 class="m-title">Catatan Lengkap</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <div style="color:var(--text-muted); font-family:var(--font-mono); font-size:11px; margin-bottom:15px;" id="nd-date"></div>
+                <div style="font-size:15px; line-height:1.6; color:var(--text-main);" id="nd-text"></div>
+            </div>
+            <div class="m-foot"><button class="btn" onclick="UI.closeModal()">Tutup</button></div>
+        </div>
+
+        <!-- Factory Reset -->
+        <div class="modal-content" id="modal-reset" style="display:none; border-color: var(--color-danger);">
+            <div class="m-head" style="background: rgba(255, 42, 85, 0.05); border-color: rgba(255, 42, 85, 0.2);"><h3 class="m-title" style="color: var(--color-danger);">Format Dimensi?</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            <div class="m-body">
+                <p style="color: var(--text-muted); font-size: 14px; text-align: center; line-height: 1.6;">Proses ini bersifat permanen. Seluruh pencapaian, analitik, dan hukum yang tersimpan di memori browser ini akan musnah.</p>
+            </div>
+            <div class="m-foot" style="justify-content: center;">
+                <button class="btn" onclick="UI.closeModal()">Batal</button><button class="btn btn-danger" onclick="Settings.hardReset()">MUSNAHKAN</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         [ JAVASCRIPT ARSITEKTUR KOGNITIF (NO EXTERNAL LIBRARIES) ]
+         ════════════════════════════════════════════════════════════════════════ -->
+    <script>
+        /* --- HELPER MENCEGAH ERROR DOM NULL --- */
+        function safeSetText(id, text) { let el = document.getElementById(id); if(el) el.innerText = text; }
+        function safeSetHtml(id, html) { let el = document.getElementById(id); if(el) el.innerHTML = html; }
+        function safeGetVal(id) { let el = document.getElementById(id); return el ? el.value : ''; }
+        function safeSetVal(id, val) { let el = document.getElementById(id); if(el) el.value = val; }
+        function safeAddClass(id, cls) { let el = document.getElementById(id); if(el) el.classList.add(cls); }
+        function safeRemClass(id, cls) { let el = document.getElementById(id); if(el) el.classList.remove(cls); }
+
+        /* --- 1. LOCAL STORAGE STATE ENGINE --- */
+        const DB_KEY = 'MYSISTEM_APEX_OS_V16';
+        
+        const DEFAULT_STATE = {
+            config: { name: 'Pewaris Matrix', avatar: '☯', theme: 'gold', audio: true, ecoMode: false, zodiac: true, marquee: 'PANTANG MENYERAH PADA KEMALASAN. DISIPLIN ADALAH HARGA MATI UNTUK KEBEBASAN.' },
+            player: { level: 1, xp: 0, hp: 100, money: 0, streak: 0, lastLogin: '', startDate: new Date().toDateString() },
+            tasks: [],
+            finances: [],
+            goals: { long: [], short: [] },
+            timeblocks: [
+                { id:'tb1', start:'05:00', end:'06:00', title:'Bangun & Olahraga', emoji:'🏃‍♂️' },
+                { id:'tb2', start:'08:00', end:'11:00', title:'Deep Work', emoji:'💻' }
+            ],
+            journal: { daily: [], weekly: [], streak: 0 },
+            notes: [],
+            principles: [
+                "UANG ADALAH ALAT. WAKTU ADALAH ASET TERMAHAL."
+            ],
+            semantic: [
+                { id: 'sem1', parentId: 'root', text: 'Kecerdasan Inti (Akar)', type: 'root', mastered: false },
+                { id: 'sem2', parentId: 'sem1', text: 'Logika & Sains (Batang)', type: 'trunk', mastered: false }
+            ],
+            semanticVault: []
+        };
+
+        let DB = {};
+
+        const DataManager = {
+            load() {
+                const raw = localStorage.getItem(DB_KEY);
+                DB = raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT_STATE));
+                
+                // Compatibility adjustments
+                if(!DB.notes) DB.notes = [];
+                if(!DB.config.marquee) DB.config.marquee = DEFAULT_STATE.config.marquee;
+                if(!DB.goals.long) DB.goals = DEFAULT_STATE.goals;
+                if(!DB.player.startDate) DB.player.startDate = new Date().toDateString();
+                if(DB.config.zodiac === undefined) DB.config.zodiac = true;
+                
+                Settings.applyTheme(DB.config.theme);
+                if(DB.config.ecoMode) document.body.classList.add('eco-mode');
+                this.checkDailyLogic();
+            },
+            save() { localStorage.setItem(DB_KEY, JSON.stringify(DB)); },
+            checkDailyLogic() {
+                const today = new Date().toDateString();
+                if (DB.player.lastLogin !== today) {
+                    if (DB.player.lastLogin) {
+                        // Cek tugas yang terlewat (Kritis & Tinggi diberi pinalti)
+                        let missed = DB.tasks.filter(t => !t.done && (t.prio === 'Kritis' || t.prio === 'Tinggi'));
+                        if (missed.length > 0) {
+                            let dmg = missed.length * 30; // 30 HP damage per tugas utama
+                            setTimeout(() => { OS.takeDamage(dmg, `HUKUM ALAM: ${missed.length} Misi Utama diabaikan. HP Menurun drastis!`); }, 3000);
+                        }
+                    }
+                    
+                    // Reset Semua Tugas agar besok bisa dicentang lagi (Daily Habit Logic)
+                    DB.tasks.forEach(t => { t.done = false; t.date = today; });
+
+                    DB.player.streak++; DB.player.lastLogin = today; this.save();
+                    setTimeout(() => OS.addExp(20, 'Siklus Baru (Login Harian)'), 1500);
+                }
+            }
+        };
+
+        /* --- 2. AUDIO SYNTHESIS ENGINE (NO EXTERNAL FILES) --- */
+        const AudioFX = {
+            ctx: null,
+            init() { if(!DB.config.audio) return; if(!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if(this.ctx.state === 'suspended') this.ctx.resume(); },
+            playClick() { 
+                if(!DB.config.audio || !this.ctx) return;
+                const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
+                o.type = 'triangle'; o.frequency.setValueAtTime(400, this.ctx.currentTime); o.frequency.exponentialRampToValueAtTime(200, this.ctx.currentTime + 0.05);
+                g.gain.setValueAtTime(0.05, this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+                o.connect(g); g.connect(this.ctx.destination); o.start(); o.stop(this.ctx.currentTime + 0.05);
+            },
+            playMissionComplete() { 
+                if(!DB.config.audio || !this.ctx) return;
+                const freqs = [392.00, 493.88, 587.33, 783.99]; // Epic G Major arpeggio
+                freqs.forEach((f, i) => {
+                    const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
+                    o.type = 'square'; o.frequency.value = f;
+                    g.gain.setValueAtTime(0, this.ctx.currentTime + (i*0.08)); 
+                    g.gain.linearRampToValueAtTime(0.05, this.ctx.currentTime + 0.05 + (i*0.08)); 
+                    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 1.2 + (i*0.08));
+                    o.connect(g); g.connect(this.ctx.destination); 
+                    o.start(this.ctx.currentTime + (i*0.08)); o.stop(this.ctx.currentTime + 1.5);
+                });
+            },
+            playError() { 
+                if(!DB.config.audio || !this.ctx) return;
+                const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
+                o.type = 'sawtooth'; o.frequency.setValueAtTime(100, this.ctx.currentTime); o.frequency.linearRampToValueAtTime(50, this.ctx.currentTime + 0.3);
+                g.gain.setValueAtTime(0.1, this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                o.connect(g); g.connect(this.ctx.destination); o.start(); o.stop(this.ctx.currentTime + 0.3);
+            },
+            playLevelUp() { 
+                if(!DB.config.audio || !this.ctx) return;
+                const freqs = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; 
+                freqs.forEach((f, i) => {
+                    const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
+                    o.type = 'square'; o.frequency.value = f;
+                    g.gain.setValueAtTime(0, this.ctx.currentTime + (i*0.12)); 
+                    g.gain.linearRampToValueAtTime(0.05, this.ctx.currentTime + 0.05 + (i*0.12)); 
+                    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 2.5);
+                    o.connect(g); g.connect(this.ctx.destination); 
+                    o.start(this.ctx.currentTime + (i*0.12)); o.stop(this.ctx.currentTime + 3.0);
+                });
+            }
+        };
+
+        /* --- 3. UI UTILITIES & CLOCK --- */
+        const UI = {
+            formatRp: (n) => 'Rp ' + parseInt(n).toLocaleString('id-ID'),
+            genId: () => '_' + Math.random().toString(36).substr(2, 9),
+            showToast(msg, type='normal') {
+                const z = document.getElementById('toast-zone');
+                if(!z) return;
+                const t = document.createElement('div');
+                t.className = `toast ${type === 'warning' ? 'danger' : (type==='success' ? 'success' : '')}`;
+                let icon = type==='warning'?'⚠️':(type==='success'?'💠':'💡');
+                t.innerHTML = `<span>${icon}</span> <span>${msg}</span>`;
+                z.appendChild(t);
+                
+                if(type==='warning') AudioFX.playError();
+                else if(type==='success') AudioFX.playMissionComplete();
+                else AudioFX.playClick();
+
+                setTimeout(() => { t.style.animation = 'slideInRight 0.3s reverse forwards'; setTimeout(() => t.remove(), 300); }, 4000);
+            },
+            openModal(id) {
+                document.querySelectorAll('.modal-content').forEach(m => m.style.display = 'none');
+                let mg = document.getElementById('modal-global'); if(mg) mg.classList.add('active');
+                let tgt = document.getElementById(id); if(tgt) tgt.style.display = 'flex';
+                AudioFX.playClick();
+            },
+            closeModal() {
+                let mg = document.getElementById('modal-global'); if(mg) mg.classList.remove('active');
+                AudioFX.playClick();
+            },
+            hideLevelUp() {
+                let el = document.getElementById('lvl-up-overlay');
+                if(el) el.classList.remove('active');
+                AudioFX.playClick();
+            }
+        };
+
+        function startRealtimeClock() {
+            const updateClock = () => {
+                const now = new Date();
+                const dStr = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                const tStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                safeSetHtml('realtime-clock', `${dStr} <span style="margin:0 10px;opacity:0.5;">|</span> ${tStr}`);
+                
+                // Realtime Indicator Updates
+                let tbView = document.getElementById('view-timeblock');
+                if(tbView && tbView.classList.contains('active')) Timeblock.render(); // Re-render to update active glow
+                
+                let goalView = document.getElementById('view-goals');
+                if(goalView && goalView.classList.contains('active')) Goals.updateCountdowns();
+            };
+            updateClock();
+            setInterval(updateClock, 60000); // 1 minute interval
+        }
+
+        /* --- 4. OS LOGIC (RPG & AI RECOMMENDATIONS) --- */
+        const OS = {
+            getMaxExp(lvl) { return Math.floor(lvl * 400 * Math.pow(1.1, lvl-1)); },
+            addExp(amt, reason) {
+                DB.player.xp += amt;
+                UI.showToast(`[EXP] ${reason} (+${amt})`, 'success');
+                let max = this.getMaxExp(DB.player.level);
+                if(DB.player.xp >= max) {
+                    DB.player.xp -= max; DB.player.level++;
+                    AudioFX.playLevelUp();
+                    safeSetText('lu-desc', `Otoritas Sistem Naik Ke Level ${DB.player.level}`);
+                    safeAddClass('cinematic-levelup', 'active');
+                }
+                DataManager.save(); Dashboard.render();
+            },
+            takeDamage(amt, msg) {
+                DB.player.hp -= amt; UI.showToast(msg, 'warning');
+                if(DB.player.hp <= 0) {
+                    DB.player.hp = 100;
+                    if(DB.player.level > 1) { DB.player.level--; UI.showToast("Vitality 0. Level Sistem Menurun.", 'warning'); }
+                }
+                DataManager.save(); Dashboard.render();
+            },
+            getRecommendation() {
+                let advices = [];
+                if(DB.player.hp < 50) advices.push("Vitality (HP) Anda rendah. Hindari kegagalan misi Kritis hari ini.");
+                if(DB.tasks.filter(t=>!t.done).length === 0) advices.push("Sistem Anda kosong. Tempa Ujian/Misi baru di Papan Manajemen Misi.");
+                let tIn = 0, tOut = 0;
+                DB.finances.forEach(f => { if(new Date(f.ms).getMonth() === new Date().getMonth()) { if(f.type === 'IN') tIn += f.amount; else tOut += f.amount; } });
+                if(tOut > tIn) advices.push("Peringatan Arus Kas: Pengeluaran bulan ini melebihi serapan energi (Pemasukan). Hemat sumber daya Anda.");
+                if(advices.length === 0) advices.push("Ritme Anda stabil. Gunakan Waktu Luang Anda untuk mempertajam pemahaman di Pohon Ilmu.");
+                return advices[0];
+            }
+        };
+
+        /* --- 5. CANVAS ENGINE (BG & CHARTS) --- */
+        const CanvasFX = {
+            bg: null, ctx: null, w: 0, h: 0, particles: [], zodiacSymbols: null,
+            initBg() {
+                this.bg = document.getElementById('bg-canvas'); 
+                if(!this.bg) return;
+                this.ctx = this.bg.getContext('2d');
+                this.resize(); window.addEventListener('resize', () => this.resize());
+                for(let i=0; i<60; i++) { this.particles.push({ x: Math.random()*this.w, y: Math.random()*this.h, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5, r: Math.random()*2 }); }
+                this.zodiacSymbols = this.initZodiac();
+                this.animateBg();
+            },
+            initZodiac() {
+                const signs = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','Gemini','Leo','Taurus','Aries','Virgo','Scorpio','Cancer','Libra'];
+                const colors = ['rgba(0,200,255,0.9)','rgba(255,215,0,0.85)','rgba(176,80,255,0.9)','rgba(255,150,80,0.85)','rgba(120,255,180,0.85)'];
+                let arr = [];
+                for(let i=0; i<18; i++) {
+                    arr.push({
+                        text: signs[i % signs.length],
+                        x: Math.random() * (window.innerWidth || 1200),
+                        y: Math.random() * (window.innerHeight || 800),
+                        vx: (Math.random()-0.5) * 0.25,
+                        vy: (Math.random()-0.5) * 0.20,
+                        size: 11 + Math.floor(Math.random()*10),
+                        color: colors[Math.floor(Math.random()*colors.length)],
+                        offset: Math.random() * Math.PI * 2
+                    });
+                }
+                return arr;
+            },
+            resize() { this.w = window.innerWidth; this.h = window.innerHeight; this.bg.width = this.w; this.bg.height = this.h; },
+            animateBg() {
+                if(!this.ctx) return;
+                this.ctx.clearRect(0,0,this.w,this.h);
+                if(document.body.classList.contains('eco-mode')) return requestAnimationFrame(() => this.animateBg());
+                
+                let accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-main').trim() || '#FFD700';
+                
+                // Galaxy nebula clouds — soft, drifting cosmic blobs
+                const t = Date.now() * 0.00008;
+                const nebulae = [
+                    { x: this.w*0.16, y: this.h*0.28, r: this.w*0.28, c1: 'rgba(72,0,160,0.07)', c2: 'rgba(30,0,90,0.03)' },
+                    { x: this.w*0.82, y: this.h*0.14, r: this.w*0.22, c1: 'rgba(0,55,180,0.06)', c2: 'rgba(0,20,80,0.02)' },
+                    { x: this.w*0.60, y: this.h*0.80, r: this.w*0.25, c1: 'rgba(110,0,75,0.06)', c2: 'rgba(50,0,40,0.02)' },
+                    { x: this.w*0.38, y: this.h*0.52, r: this.w*0.18, c1: 'rgba(20,0,100,0.05)', c2: 'transparent' },
+                    { x: this.w*0.90, y: this.h*0.65, r: this.w*0.20, c1: 'rgba(60,0,130,0.05)', c2: 'transparent' },
+                ];
+                nebulae.forEach((n, idx) => {
+                    let dx = Math.sin(t + idx * 1.3) * 18;
+                    let dy = Math.cos(t + idx * 0.9) * 12;
+                    let g = this.ctx.createRadialGradient(n.x+dx, n.y+dy, 0, n.x, n.y, n.r);
+                    g.addColorStop(0, n.c1); g.addColorStop(0.6, n.c2 !== 'transparent' ? n.c2 : 'rgba(0,0,0,0.01)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+                    this.ctx.fillStyle = g;
+                    this.ctx.beginPath(); this.ctx.arc(n.x, n.y, n.r, 0, Math.PI*2); this.ctx.fill();
+                });
+                
+                // Zodiac symbols floating (can be toggled off)
+                if(DB.config && DB.config.zodiac !== false && this.zodiacSymbols) {
+                    this.ctx.textAlign = 'center';
+                    this.zodiacSymbols.forEach(z => {
+                        z.x += z.vx; z.y += z.vy;
+                        if(z.x < -60) z.x = this.w + 30;
+                        if(z.x > this.w + 60) z.x = -30;
+                        if(z.y < -60) z.y = this.h + 30;
+                        if(z.y > this.h + 60) z.y = -30;
+                        let pulse = 0.045 + 0.032 * Math.sin(Date.now() * 0.00045 + z.offset);
+                        this.ctx.globalAlpha = pulse;
+                        this.ctx.fillStyle = z.color;
+                        this.ctx.font = `${z.size}px serif`;
+                        this.ctx.fillText(z.text, z.x, z.y);
+                        this.ctx.globalAlpha = 1;
+                    });
+                    this.ctx.textAlign = 'left';
+                }
+                
+                this.ctx.lineWidth = 0.5;
+                for(let i=0; i<this.particles.length; i++) {
+                    let p1 = this.particles[i]; p1.x += p1.vx; p1.y += p1.vy;
+                    if(p1.x<0||p1.x>this.w) p1.vx*=-1; if(p1.y<0||p1.y>this.h) p1.vy*=-1;
+                    
+                    for(let j=i+1; j<this.particles.length; j++) {
+                        let p2 = this.particles[j]; let dist = Math.hypot(p1.x-p2.x, p1.y-p2.y);
+                        if(dist < 150) {
+                            this.ctx.strokeStyle = `rgba(180, 150, 255, ${0.06 - dist/2500})`;
+                            this.ctx.beginPath(); this.ctx.moveTo(p1.x, p1.y); this.ctx.lineTo(p2.x, p2.y); this.ctx.stroke();
+                        }
+                    }
+                    // Stars with gentle twinkle
+                    let twinkle = 0.25 + 0.18 * Math.sin(Date.now()*0.0008 + i * 0.7);
+                    this.ctx.fillStyle = '#FFFFFF'; this.ctx.globalAlpha = twinkle;
+                    this.ctx.beginPath(); this.ctx.arc(p1.x, p1.y, p1.r * 0.75, 0, Math.PI*2); this.ctx.fill(); this.ctx.globalAlpha = 1;
+                }
+                requestAnimationFrame(() => this.animateBg());
+            },
+            
+            drawLineChart(dataPts) {
+                const cvs = document.getElementById('chart-line'); if(!cvs) return;
+                const ctx = cvs.getContext('2d'); const rect = cvs.parentElement.getBoundingClientRect();
+                cvs.width = rect.width*2; cvs.height = rect.height*2; ctx.scale(2,2);
+                const w = rect.width, h = rect.height, pt=40, pb=30, pl=60, pr=30;
+                
+                let accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-main').trim();
+                ctx.clearRect(0,0,w,h);
+                if(!dataPts || dataPts.length===0) { ctx.fillStyle='#555'; ctx.textAlign='center'; ctx.font='12px Inter'; ctx.fillText('Belum ada jejak kas', w/2, h/2); return; }
+
+                let max = Math.max(...dataPts), min = Math.min(...dataPts);
+                if(max===min) { max+=1000; min-=1000; }
+                let range = max - min;
+
+                ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.fillStyle = '#666'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'right';
+                for(let i=0; i<=4; i++) {
+                    let y = pt + (h-pt-pb)*(i/4); let val = max - range*(i/4);
+                    ctx.beginPath(); ctx.moveTo(pl, y); ctx.lineTo(w-pr, y); ctx.stroke();
+                    ctx.fillText((val/1000).toFixed(0)+'k', pl-10, y+3);
+                }
+
+                let stepX = (w-pl-pr) / Math.max(1, dataPts.length-1);
+                ctx.beginPath();
+                let pointsCoord = [];
+                for(let i=0; i<dataPts.length; i++) {
+                    let x = pl + i*stepX, y = pt + (1 - (dataPts[i]-min)/range) * (h-pt-pb);
+                    pointsCoord.push({x, y, val: dataPts[i]});
+                    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+                }
+                ctx.strokeStyle = accent; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.stroke();
+                
+                ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.font = '10px JetBrains Mono';
+                pointsCoord.forEach(p => { ctx.fillText(UI.formatRp(p.val), p.x, p.y - 10); });
+            },
+
+            drawBarChart(categories) {
+                const cvs = document.getElementById('chart-bar'); if(!cvs) return;
+                const ctx = cvs.getContext('2d'); const rect = cvs.parentElement.getBoundingClientRect();
+                cvs.width = rect.width*2; cvs.height = rect.height*2; ctx.scale(2,2);
+                const w = rect.width, h = rect.height, pt=40, pb=40, pl=50, pr=10;
+                
+                ctx.clearRect(0,0,w,h);
+                let cats = Object.keys(categories);
+                if(cats.length === 0) { ctx.fillStyle='#555'; ctx.textAlign='center'; ctx.font='12px Inter'; ctx.fillText('Tidak ada pengeluaran', w/2, h/2); return; }
+
+                let maxVal = Math.max(...Object.values(categories));
+                if(maxVal === 0) maxVal = 100;
+
+                ctx.fillStyle = '#666'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'right';
+                for(let i=0; i<=2; i++) {
+                    let y = pt + (h-pt-pb)*(i/2); let val = maxVal - maxVal*(i/2);
+                    ctx.fillText((val/1000).toFixed(0)+'k', pl-5, y+3);
+                }
+
+                let barW = Math.min(40, (w-pl-pr) / cats.length * 0.6);
+                let stepX = (w-pl-pr) / cats.length;
+                let colorDanger = getComputedStyle(document.documentElement).getPropertyValue('--color-danger').trim();
+
+                ctx.textAlign = 'center'; 
+                cats.forEach((cat, i) => {
+                    let val = categories[cat];
+                    let barH = (val / maxVal) * (h-pt-pb);
+                    let x = pl + i*stepX + (stepX - barW)/2;
+                    let y = h - pb - barH;
+                    
+                    ctx.fillStyle = colorDanger; ctx.fillRect(x, y, barW, barH);
+                    ctx.fillStyle = '#fff'; ctx.font = '10px JetBrains Mono'; ctx.fillText(UI.formatRp(val), x + barW/2, y - 5);
+                    ctx.fillStyle = '#999'; ctx.font = '10px Inter'; ctx.fillText(cat.substring(0,8), x + barW/2, h - pb + 15);
+                });
+            },
+
+            drawJournalChart() {
+                // replaced by renderJournalCalendar — kept as no-op for compatibility
+                renderJournalCalendar();
+            },
+
+            drawJourneyChart() {
+                const cvs = document.getElementById('journey-chart-canvas'); if(!cvs) return;
+                const ctx = cvs.getContext('2d'); const rect = cvs.parentElement.getBoundingClientRect();
+                if(rect.width === 0) return;
+                cvs.width = rect.width*2; cvs.height = rect.height*2; ctx.scale(2,2);
+                const w = rect.width, h = rect.height, pt=12, pb=18, pl=8, pr=8;
+                let accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-main').trim();
+
+                ctx.clearRect(0,0,w,h);
+                let start = new Date(DB.player.startDate);
+                let now = new Date();
+                let totalDays = Math.max(2, Math.ceil((now - start) / (1000*60*60*24)));
+                let maxDays = Math.min(totalDays, 90);
+
+                let dataPts = [];
+                for(let i=0; i<maxDays; i++) {
+                    let d = new Date(start); d.setDate(d.getDate() + i);
+                    dataPts.push(DB.journal.daily.some(j => j.date === d.toDateString()) ? 1 : 0);
+                }
+
+                if(dataPts.length < 2) {
+                    ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.textAlign='center'; ctx.font='10px Inter';
+                    ctx.fillText('Perjalanan belum cukup untuk digambar', w/2, h/2+3); return;
+                }
+
+                // Baseline
+                ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=1;
+                ctx.beginPath(); ctx.moveTo(pl, h-pb); ctx.lineTo(w-pr, h-pb); ctx.stroke();
+
+                let stepX = (w-pl-pr) / (dataPts.length-1);
+                let pts = dataPts.map((v,i) => ({ x: pl+i*stepX, y: v===1 ? pt : h-pb-1 }));
+
+                // Filled area gradient
+                ctx.beginPath(); ctx.moveTo(pts[0].x, h-pb);
+                pts.forEach(p => ctx.lineTo(p.x, p.y));
+                ctx.lineTo(pts[pts.length-1].x, h-pb); ctx.closePath();
+                let grad = ctx.createLinearGradient(0, pt, 0, h-pb);
+                grad.addColorStop(0, 'rgba(120,70,255,0.30)'); grad.addColorStop(1, 'rgba(40,0,120,0.03)');
+                ctx.fillStyle = grad; ctx.fill();
+
+                // Line
+                ctx.beginPath(); pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+                ctx.strokeStyle = accent; ctx.lineWidth = 1.5; ctx.lineJoin='round'; ctx.stroke();
+
+                // Start & end labels
+                ctx.fillStyle='rgba(255,255,255,0.35)'; ctx.font='8px JetBrains Mono'; ctx.textAlign='left';
+                ctx.fillText(start.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'2-digit'}), pl, h-2);
+                ctx.textAlign='right';
+                ctx.fillText('Hari Ini', w-pr, h-2);
+                // Count label
+                let filled = dataPts.filter(p=>p===1).length;
+                ctx.textAlign='center'; ctx.fillStyle='rgba(255,255,255,0.45)'; ctx.font='9px JetBrains Mono';
+                ctx.fillText(`${filled}/${dataPts.length} hari terisi`, w/2, pt-1);
+            }
+        };
+
+        /* --- JOURNAL CALENDAR RENDERER --- */
+        function renderJournalCalendar() {
+            const container = document.getElementById('journal-calendar-container');
+            if(!container) return;
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const journalDates = new Set(
+                DB.journal.daily.map(j => {
+                    const d = new Date(j.date);
+                    if(d.getFullYear()===year && d.getMonth()===month) return d.getDate();
+                    return null;
+                }).filter(d => d !== null)
+            );
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month+1, 0).getDate();
+            const today = now.getDate();
+            const monthNames = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const dayLabels = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+            let html = `<div style="font-family:'Cinzel'; font-size:11px; color:var(--accent-main); text-align:center; margin-bottom:8px; letter-spacing:1px;">${monthNames[month]} ${year}</div>`;
+            html += `<div style="display:grid; grid-template-columns:repeat(7,1fr); gap:3px; text-align:center;">`;
+            dayLabels.forEach(d => { html += `<div style="font-size:9px; color:var(--text-muted); font-family:'JetBrains Mono'; padding:2px 0;">${d}</div>`; });
+            for(let i=0; i<firstDay; i++) html += `<div></div>`;
+            for(let day=1; day<=lastDate; day++) {
+                const has = journalDates.has(day);
+                const isTdy = day === today;
+                let s = `padding:4px 2px; font-size:10px; border-radius:5px; font-family:'JetBrains Mono'; cursor:default;`;
+                if(isTdy && has) s += `background:linear-gradient(135deg,rgba(0,200,255,0.55),rgba(255,215,0,0.45)); color:#fff; font-weight:bold; box-shadow:0 0 6px rgba(0,200,255,0.35);`;
+                else if(isTdy) s += `border:1px solid var(--accent-main); color:var(--accent-main); font-weight:bold;`;
+                else if(has) s += `background:linear-gradient(135deg,rgba(0,200,255,0.22),rgba(160,60,255,0.20)); color:rgba(0,220,255,0.85); box-shadow:0 0 4px rgba(0,160,255,0.15);`;
+                else s += `color:rgba(255,255,255,0.22);`;
+                html += `<div style="${s}">${day}</div>`;
+            }
+            html += `</div>`;
+            // Legend
+            html += `<div style="display:flex; gap:12px; margin-top:8px; justify-content:center;">`;
+            html += `<span style="font-size:9px; color:rgba(0,220,255,0.7);">🟦 Ada Jurnal</span>`;
+            html += `<span style="font-size:9px; color:var(--accent-main);">□ Hari Ini</span>`;
+            html += `<span style="font-size:9px; color:rgba(255,255,255,0.25);">· Kosong</span>`;
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        /* --- 6. ROUTING --- */
+        const Router = {
+            init() {
+                document.querySelectorAll('.nav-item, .m-nav-btn').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        let target = e.currentTarget.getAttribute('data-nav');
+                        if(target) this.nav(target);
+                    });
+                    el.addEventListener('mouseenter', () => AudioFX.playClick());
+                });
+            },
+            nav(target) {
+                if(!target) return;
+                AudioFX.init(); AudioFX.playClick();
+                document.querySelectorAll('.nav-item, .m-nav-btn').forEach(e => e.classList.remove('active'));
+                
+                let dNav = document.querySelector(`.nav-item[data-nav="${target}"]`);
+                let mNav = document.querySelector(`.m-nav-btn[data-nav="${target}"]`);
+                if(dNav) dNav.classList.add('active'); if(mNav) mNav.classList.add('active');
+
+                const titles = { 'home': 'Titik Pusat', 'tasks': 'Manajemen Misi', 'finance': 'Analitik Finansial', 'goals': 'Visi & Target', 'timeblock': 'Jadwal Harian', 'eval': 'Jurnal & Evaluasi', 'semantic': 'Pohon Semantik Ilmu', 'principles': 'Prinsip & Nilai', 'settings': 'Pengaturan OS' };
+                safeSetText('view-title-text', titles[target] || 'MYSISTEM');
+
+                document.querySelectorAll('.view-pane').forEach(e => e.classList.remove('active'));
+                let viewTarget = document.getElementById(`view-${target}`);
+                if(viewTarget) viewTarget.classList.add('active');
+                
+                // Triggers
+                if(target === 'home') Dashboard.render();
+                if(target === 'tasks') Tasks.render();
+                if(target === 'finance') Finance.render();
+                if(target === 'goals') Goals.render();
+                if(target === 'timeblock') Timeblock.render();
+                if(target === 'eval') Eval.renderHistory();
+                if(target === 'semantic') SemanticTree.render();
+                if(target === 'principles') Principles.render();
+            }
+        };
+
+        /* --- 7. FEATURE CONTROLLERS --- */
+        
+        const Dashboard = {
+            render() {
+                const c = DB.config, p = DB.player;
+                
+                safeSetText('sidebar-avatar', c.avatar); safeSetText('dh-icon', c.avatar);
+                safeSetText('sb-name', c.name); safeSetText('dh-name', c.name);
+                
+                safeSetText('dh-lvl', p.level);
+                
+                let mx = OS.getMaxExp(p.level);
+                safeSetText('dh-xp-val', `${p.xp}/${mx}`);
+                let dXpBar = document.getElementById('dh-xp-bar'); if(dXpBar) dXpBar.style.width = `${(p.xp/mx)*100}%`;
+                
+                safeSetText('dh-hp-val', `${p.hp}/100`);
+                let dHpBar = document.getElementById('dh-hp-bar'); if(dHpBar) dHpBar.style.width = `${p.hp}%`;
+
+                // Finance Home Sum
+                let tIn = 0, tOut = 0;
+                let curMo = new Date().getMonth();
+                DB.finances.forEach(f => {
+                    if(new Date(f.ms).getMonth() === curMo) { if(f.type === 'IN') tIn += f.amount; else tOut += f.amount; }
+                });
+                safeSetText('dh-money-in', UI.formatRp(tIn)); safeSetText('dh-money-out', UI.formatRp(tOut));
+
+                // Home Marquee Text (From config)
+                let mqElem = document.getElementById('home-marquee-display');
+                if(mqElem) mqElem.innerText = `"${c.marquee || DEFAULT_STATE.config.marquee}"`;
+
+                // Principles Home (All listed neatly in a block)
+                let hpList = document.getElementById('home-principle-display');
+                if(hpList) {
+                    hpList.innerHTML = DB.principles.length ? DB.principles.map((p, i) => `
+                        <div class="text-principle-gold" style="font-size:18px; margin-bottom:10px;">"${p}"</div>
+                    `).join('') : '<div class="txt-muted">Pahat prinsip Anda di menu Prinsip.</div>';
+                }
+
+                // AI Advisor Feature
+                safeSetText('ai-advisor-text', OS.getRecommendation());
+
+                // Quick Quests
+                let actQ = DB.tasks.filter(q => !q.done).slice(0,3);
+                const ql = document.getElementById('dash-task-list');
+                if(ql) {
+                    ql.innerHTML = actQ.length ? actQ.map(q => Tasks.buildHtml(q)).join('') : '<p class="txt-muted" style="text-align:center; padding:10px;">Sistem bersih. Seluruh misi diselesaikan.</p>';
+                }
+
+                // Quick Timeblock
+                let actT = [...DB.timeblocks].sort((a,b) => a.start.localeCompare(b.start));
+                const tl = document.getElementById('dh-time-list');
+                if(tl) {
+                    tl.innerHTML = actT.length ? actT.map(t => {
+                        let [sh, sm] = t.start.split(':').map(Number);
+                        let [eh, em] = t.end.split(':').map(Number);
+                        let now = new Date(); let currMins = now.getHours()*60 + now.getMinutes();
+                        let sMins = sh*60 + sm; let eMins = eh*60 + em;
+                        let isNow = currMins >= sMins && currMins <= eMins;
+                        
+                        return `<div style="font-size:13px; margin-bottom:10px; border-left:2px solid var(--accent-main); padding-left:10px; background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; ${isNow?'border-color:var(--color-danger); box-shadow:0 0 10px rgba(255,42,85,0.3);':''}"><span class="mono text-muted">${t.start}</span> ${t.emoji} ${t.title}</div>`;
+                    }).join('') : '<p class="txt-muted" style="font-size:12px; text-align:center;">Belum ada jadwal harian.</p>';
+                }
+            }
+        };
+
+        const Tasks = {
+            pMap: {'Kritis':{e:100,cls:'prio-kritis'}, 'Tinggi':{e:50,cls:'prio-tinggi'}, 'Normal':{e:25,cls:'prio-normal'}},
+            editId: null,
+            render() {
+                const actD = document.getElementById('q-vip-list'), normD = document.getElementById('q-normal-list'), hisD = document.getElementById('q-history-list');
+                if(!actD || !normD || !hisD) return;
+                
+                // UNLIMITED TASKS Logic
+                let high = DB.tasks.filter(q => !q.done && (q.prio === 'Kritis' || q.prio === 'Tinggi'));
+                let normal = DB.tasks.filter(q => !q.done && q.prio === 'Normal');
+                let his = DB.tasks.filter(q => q.done).slice(0, 5);
+                
+                actD.innerHTML = high.length ? high.map(q => this.buildHtml(q)).join('') : '<p class="txt-muted" style="text-align:center;">Tidak ada misi prioritas tertinggi.</p>';
+                normD.innerHTML = normal.length ? normal.map(q => this.buildHtml(q)).join('') : '<p class="txt-muted" style="padding: 20px; text-align:center;">Tidak ada misi normal.</p>';
+                hisD.innerHTML = his.map(q => this.buildHtml(q)).join('');
+            },
+            buildHtml(q) {
+                let pd = this.pMap[q.prio] || this.pMap['Normal'];
+                return `
+                    <div class="task-card ${pd.cls} ${q.done?'done':''}" onclick="Tasks.toggle('${q.id}')">
+                        <div class="tc-check ${q.done?'checked':''}"></div>
+                        <div class="tc-content">
+                            <div class="tc-title">${q.title}</div>
+                            <div class="tc-meta"><span style="color:${q.prio==='Kritis'?'#FF2A55':(q.prio==='Tinggi'?'#FFD700':'#00BFFF')}; font-weight:bold;">${q.prio}</span> | <span>${q.date}</span></div>
+                        </div>
+                        ${!q.done ? `<div class="mono txt-accent" style="font-weight:bold; font-size:12px;">+${pd.e} XP</div>` : ''}
+                        <div class="tc-actions">
+                            <span class="tc-edit" title="Ubah Misi" onclick="event.stopPropagation(); Tasks.edit('${q.id}')">✎</span>
+                            <span class="tc-del" title="Hapus Misi" onclick="event.stopPropagation(); Tasks.del('${q.id}')">✖</span>
+                        </div>
+                    </div>
+                `;
+            },
+            openAdd() {
+                this.editId = null;
+                safeSetVal('mq-title', ''); safeSetVal('mq-prio', 'Normal');
+                safeSetText('mq-modal-title', 'Bentuk Misi Baru');
+                safeSetText('mq-save-btn', 'Segel Misi');
+                UI.openModal('modal-task');
+            },
+            edit(id) {
+                let q = DB.tasks.find(x => x.id === id); if(!q) return;
+                this.editId = id;
+                safeSetVal('mq-title', q.title); safeSetVal('mq-prio', q.prio);
+                safeSetText('mq-modal-title', 'Ubah Misi');
+                safeSetText('mq-save-btn', 'Simpan Perubahan');
+                UI.openModal('modal-task');
+            },
+            del(id) {
+                DB.tasks = DB.tasks.filter(x => x.id !== id);
+                DataManager.save(); AudioFX.playClick(); this.render(); Dashboard.render();
+                UI.showToast("Misi dihapus dari sistem.", "success");
+            },
+            save() {
+                let t = safeGetVal('mq-title'), p = safeGetVal('mq-prio');
+                if(!t) return UI.showToast("Penamaan misi wajib.", "warning");
+                
+                if(this.editId) {
+                    let q = DB.tasks.find(x => x.id === this.editId);
+                    if(q) { q.title = t; q.prio = p; }
+                    this.editId = null;
+                    UI.showToast("Misi berhasil diubah.", "success");
+                } else {
+                    DB.tasks.unshift({id: UI.genId(), title: t, prio: p, done: false, date: new Date().toDateString()});
+                    UI.showToast("Misi disegel.", "success");
+                }
+                DataManager.save(); UI.closeModal(); safeSetVal('mq-title', '');
+                this.render(); Dashboard.render();
+            },
+            toggle(id) {
+                let q = DB.tasks.find(x => x.id === id); if(!q) return;
+                if(!q.done) {
+                    q.done = true; 
+                    let pd = this.pMap[q.prio] || this.pMap['Normal'];
+                    OS.addExp(pd.e, "Penyelesaian Misi");
+                    UI.showToast("MISSION COMPLETE", "success");
+                } else { q.done = false; AudioFX.playClick(); }
+                DataManager.save(); this.render(); Dashboard.render();
+            }
+        };
+
+        const Finance = {
+            render() {
+                const tb = document.getElementById('f-ledger-list');
+                if(!tb) return;
+                let arr = [...DB.finances].reverse().slice(0, 12);
+                tb.innerHTML = arr.length ? arr.map(f => {
+                    let isIn = f.type==='IN';
+                    return `<tr><td class="txt-muted mono">${f.date}</td><td>${f.desc}</td><td><span class="badge ${isIn?'bdg-low':'bdg-high'}">${f.type}</span></td><td class="mono" style="text-align:right; font-weight:bold; color:${isIn?'var(--color-success)':'var(--color-danger)'}">${isIn?'+':'-'}${UI.formatRp(f.amount)}</td></tr>`;
+                }).join('') : '<tr><td colspan="4" style="text-align:center; color:#555;">Belum ada jejak finansial.</td></tr>';
+
+                // Chart & Summary Data Calculations
+                let dPts = [], bal = 0, categories = {};
+                let tin=0, tout=0;
+                let sorted = [...DB.finances].sort((a,b)=>a.ms-b.ms);
+                let rec = sorted.slice(-10); // Last 10 transactions for line chart
+                
+                // For Line Chart
+                sorted.slice(0, sorted.length-rec.length).forEach(f => { bal += (f.type==='IN'?f.amount:-f.amount); });
+                if(rec.length>0) dPts.push(bal);
+                rec.forEach(f => { bal += (f.type==='IN'?f.amount:-f.amount); dPts.push(bal); });
+                
+                // For Summary & Bar Chart
+                DB.finances.forEach(f => {
+                    if(f.type === 'IN') tin += f.amount;
+                    if(f.type === 'OUT') { 
+                        tout += f.amount;
+                        categories[f.desc] = (categories[f.desc] || 0) + f.amount; 
+                    }
+                });
+
+                safeSetText('fs-in', UI.formatRp(tin)); safeSetText('fs-out', UI.formatRp(tout)); safeSetText('fs-net', UI.formatRp(tin - tout));
+
+                setTimeout(() => { CanvasFX.drawLineChart(dPts); CanvasFX.drawBarChart(categories); }, 100);
+            },
+            openModal(type) { safeSetVal('mcf-type', type); safeSetText('mcf-title', type==='IN'?'Catat Pemasukan':'Catat Pengeluaran'); UI.openModal('modal-finance'); },
+            save() {
+                let amt = parseInt(safeGetVal('mcf-amount')), dsc = safeGetVal('mcf-desc'), type = safeGetVal('mcf-type');
+                if(!amt||!dsc) return UI.showToast("Data arus kas tidak valid.", "warning");
+                DB.finances.push({id:UI.genId(), type:type, amount:amt, desc:dsc, date:new Date().toLocaleDateString('id-ID'), ms:Date.now()});
+                if(type==='IN') DB.player.money += amt; else DB.player.money -= amt;
+                DataManager.save(); UI.closeModal(); safeSetVal('mcf-amount', ''); safeSetVal('mcf-desc', '');
+                UI.showToast("Arus Kas Dicatat.", "success"); OS.addExp(5, "Manajemen Finansial"); this.render(); Dashboard.render();
+            }
+        };
+
+        const Goals = {
+            render() {
+                ['long', 'short'].forEach(t => {
+                    let d = document.getElementById(`goal-${t}-list`);
+                    if(!d) return;
+                    let items = DB.goals[t] || [];
+                    d.innerHTML = items.length ? items.map(g => `
+                        <div class="goal-card">
+                            <div class="gc-del" onclick="Goals.del('${t}','${g.id}')">✖</div>
+                            <div class="gc-text">${g.text}</div>
+                            ${g.deadline ? `<div class="gc-timer" id="timer-${g.id}">Batas: ${g.deadline}</div>` : ''}
+                            <div class="gc-prog-wrap" onclick="Goals.addProgress('${t}', '${g.id}')">
+                                <div class="gc-prog-fill" style="width:${g.progress}%"></div>
+                            </div>
+                            <div class="gc-prog-text">${g.progress}% Selesai (Klik Bar untuk tambah progres)</div>
+                        </div>
+                    `).join('') : `<p class="txt-muted" style="text-align:center; font-size:12px;">Belum ada target ditetapkan.</p>`;
+                });
+                this.updateCountdowns();
+
+                // Render recommendations
+                let recBox = document.getElementById('goal-recommendation-list');
+                if(recBox) {
+                    let recs = this.getGoalRecommendation();
+                    recBox.innerHTML = recs.map(r => `
+                        <div style="font-size:13px; line-height:1.7; color:var(--text-main); background:rgba(0,0,0,0.35); padding:10px 14px; border-radius:8px; border-left:3px solid var(--color-info);">${r}</div>
+                    `).join('');
+                }
+            },
+            getGoalRecommendation() {
+                let recs = [];
+                let now = new Date();
+                let allGoals = [...(DB.goals.long||[]), ...(DB.goals.short||[])];
+
+                if(allGoals.length === 0) {
+                    recs.push("📌 Anda belum memiliki target apapun. Mulai dengan satu visi konkret — coba target jangka pendek 30 hari terlebih dahulu.");
+                    return recs;
+                }
+
+                allGoals.forEach(g => {
+                    if(g.progress === 0 && !g.deadline) {
+                        recs.push(`🎯 Target <b>"${g.text.substring(0,50)}"</b> belum ada progres sama sekali. Ambil langkah pertama hari ini!`);
+                    }
+                    if(g.deadline) {
+                        let diff = new Date(g.deadline).getTime() - now.getTime();
+                        let days = Math.floor(diff / (1000*60*60*24));
+                        if(diff > 0 && days <= 7 && g.progress < 100) {
+                            recs.push(`⚠️ Target <b>"${g.text.substring(0,50)}"</b> tenggat dalam <b>${days} hari</b> dengan progres ${g.progress}%. Percepat aksi Anda!`);
+                        } else if(diff < 0 && g.progress < 100) {
+                            recs.push(`🔴 Target <b>"${g.text.substring(0,50)}"</b> sudah melewati tenggat dengan progres ${g.progress}%. Evaluasi & perbarui deadline.`);
+                        }
+                    }
+                });
+
+                let completed = allGoals.filter(g=>g.progress===100).length;
+                if(completed === allGoals.length && allGoals.length > 0) {
+                    recs.push("🏆 Semua target tercapai! Saatnya menetapkan visi yang lebih besar dan menantang.");
+                } else if(completed > 0) {
+                    recs.push(`✅ ${completed} dari ${allGoals.length} target telah selesai. Pertahankan momentum ini!`);
+                }
+
+                if(DB.player.hp < 50) recs.push("💊 Vitality Anda rendah. Fokus selesaikan target yang hampir tuntas sebelum menambah visi baru.");
+                if(DB.player.streak >= 7) recs.push(`🔥 Streak ${DB.player.streak} hari berturut-turut! Manfaatkan momentum ini untuk mendorong progres target besar Anda.`);
+
+                if(recs.length === 0) recs.push("🧭 Ritme target Anda sehat. Tetap konsisten memperbarui progres setiap hari untuk menjaga momentum.");
+                return recs.slice(0, 4);
+            },
+            setRecDate(days) {
+                let d = new Date(); d.setDate(d.getDate() + days);
+                safeSetVal('mg-date', d.toISOString().split('T')[0]);
+            },
+            save() {
+                let t = safeGetVal('mg-type'), txt = safeGetVal('mg-text'), d = safeGetVal('mg-date');
+                if(!txt) return UI.showToast("Deskripsi visi tidak boleh kosong.", "warning");
+                if(!DB.goals[t]) DB.goals[t] = [];
+                DB.goals[t].push({id: UI.genId(), text: txt, deadline: d, progress: 0});
+                DataManager.save(); UI.closeModal(); safeSetVal('mg-text', ''); safeSetVal('mg-date', '');
+                UI.showToast("Target tertanam di sistem.", "success"); this.render();
+            },
+            del(type, id) {
+                DB.goals[type] = DB.goals[type].filter(g => g.id !== id);
+                DataManager.save(); AudioFX.playClick(); this.render();
+            },
+            addProgress(type, id) {
+                let g = DB.goals[type].find(x => x.id === id);
+                if(g) {
+                    g.progress += 10;
+                    if(g.progress > 100) g.progress = 100;
+                    if(g.progress === 100) { AudioFX.playMissionComplete(); UI.showToast("TARGET TERCAPAI!", "success"); OS.addExp(50, "Pencapaian Visi"); }
+                    else { AudioFX.playClick(); }
+                    DataManager.save(); this.render();
+                }
+            },
+            updateCountdowns() {
+                ['long', 'short'].forEach(t => {
+                    let items = DB.goals[t] || [];
+                    items.forEach(g => {
+                        if(g.deadline) {
+                            let el = document.getElementById(`timer-${g.id}`);
+                            if(el) {
+                                let diff = new Date(g.deadline).getTime() - new Date().getTime();
+                                if(diff > 0) {
+                                    let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                    el.innerText = `${days} Hari ${hours} Jam Tersisa`;
+                                } else {
+                                    el.innerText = "WAKTU HABIS / TENGGAT TERLEWATI";
+                                    el.style.color = "var(--color-danger)"; el.style.borderColor = "var(--color-danger)";
+                                }
+                            }
+                        }
+                    });
+                });
+            }
+        };
+
+        const Timeblock = {
+            render() {
+                const list = document.getElementById('timeblock-render-area');
+                if(!list) return;
+                
+                let html = '';
+                DB.timeblocks.forEach(t => {
+                    let [sh, sm] = t.start.split(':').map(Number);
+                    let [eh, em] = t.end.split(':').map(Number);
+                    let startMin = sh*60 + sm; let endMin = eh*60 + em;
+                    if(endMin <= startMin) endMin = startMin + 60; // fallback 1 hr
+                    let duration = endMin - startMin;
+
+                    html += `
+                        <div class="sch-item" id="sch-${t.id}">
+                            <div class="sch-dot"></div>
+                            <div class="sch-time">${t.start} - ${t.end}</div>
+                            <div class="sch-emoji">${t.emoji}</div>
+                            <div class="sch-title">${t.title}</div>
+                            <div class="sch-del" onclick="event.stopPropagation(); Timeblock.del('${t.id}')">✖</div>
+                        </div>
+                    `;
+                });
+                list.innerHTML = html;
+                this.updateIndicator(new Date()); // Call immediately to set active states
+            },
+            updateIndicator(now) {
+                // Update active states by looping and adding active-now class
+                DB.timeblocks.forEach(t => {
+                    let [sh, sm] = t.start.split(':').map(Number);
+                    let [eh, em] = t.end.split(':').map(Number);
+                    let startMin = sh*60 + sm; let endMin = eh*60 + em;
+                    if(endMin <= startMin) endMin = startMin + 60;
+                    
+                    let currMins = now.getHours()*60 + now.getMinutes();
+                    let el = document.getElementById(`sch-${t.id}`);
+                    if(el) {
+                        if(currMins >= startMin && currMins <= endMin) el.classList.add('active-now');
+                        else el.classList.remove('active-now');
+                    }
+                });
+            },
+            save() {
+                let s = safeGetVal('mt-start'), e = safeGetVal('mt-end'), t = safeGetVal('mt-title'), em = safeGetVal('mt-emoji') || '⚡';
+                if(!s || !e || !t) return UI.showToast("Waktu dan judul wajib diisi.", "warning");
+                
+                DB.timeblocks.push({id: UI.genId(), start: s, end: e, title: t, emoji: em});
+                DataManager.save(); UI.closeModal();
+                ['mt-start','mt-end','mt-title','mt-emoji'].forEach(id => safeSetVal(id, ''));
+                UI.showToast("Jadwal harian dipetakan.", "success"); this.render(); Dashboard.render();
+            },
+            del(id) {
+                DB.timeblocks = DB.timeblocks.filter(t => t.id !== id);
+                DataManager.save(); AudioFX.playClick(); this.render(); Dashboard.render();
+            }
+        };
+
+        const SemanticTree = {
+            render() {
+                const container = document.getElementById('semantic-tree-render');
+                const sel = document.getElementById('ms-parent');
+                if(!container || !sel) return;
+                
+                sel.innerHTML = '<option value="root">-- Jadikan Akar Baru (Fondasi Utama) --</option>';
+                DB.semantic.forEach(n => { sel.innerHTML += `<option value="${n.id}">Induk: ${n.text}</option>`; });
+
+                let html = this.buildNodeHtml('root');
+                container.innerHTML = html || '<p class="text-muted">Pohon ilmu masih kosong. Tanamkan fondasi pertama.</p>';
+                this.renderVault();
+            },
+            buildNodeHtml(parentId) {
+                let children = DB.semantic.filter(n => n.parentId === parentId);
+                if(children.length === 0) return '';
+                
+                let isRoot = parentId === 'root';
+                let html = `<div class="${isRoot ? '' : 'tree-children'}">`;
+                
+                children.forEach(n => {
+                    let typeLabel = n.type === 'root' ? 'AKAR' : (n.type === 'trunk' ? 'BATANG' : 'DAUN');
+                    html += `<div class="tree-wrapper">`;
+                    html += `<div class="tree-node ${n.type} ${n.mastered ? 'mastered' : ''}">
+                                <span class="node-type">${typeLabel}</span>
+                                <span class="node-text">${n.text}</span>
+                                <div class="node-actions">
+                                    <button class="n-btn" onclick="SemanticTree.editPrompt('${n.id}')">✎ Edit</button>
+                                    ${!n.mastered ? `<button class="n-btn" onclick="SemanticTree.master('${n.id}')">★ Master</button>` : ''}
+                                    <button class="n-btn btn-del" onclick="SemanticTree.delPrompt('${n.id}')">✖</button>
+                                </div>
+                             </div>`;
+                    html += this.buildNodeHtml(n.id); // recursive
+                    html += `</div>`;
+                });
+                html += `</div>`;
+                return html;
+            },
+            save() {
+                let t = safeGetVal('ms-text'), editId = safeGetVal('ms-id-edit');
+                if(!t) return UI.showToast("Nama ilmu wajib diisi.", "warning");
+                
+                if(editId) {
+                    let node = DB.semantic.find(x => x.id === editId);
+                    if(node) node.text = t;
+                    UI.showToast("Simpul ilmu diperbarui.", "success");
+                } else {
+                    let p = safeGetVal('ms-parent'), type = safeGetVal('ms-type');
+                    if(p === 'root') type = 'root'; 
+                    DB.semantic.push({ id: UI.genId(), parentId: p, text: t, type: type, mastered: false });
+                    UI.showToast("Simpul ilmu ditambahkan.", "success");
+                }
+                
+                DataManager.save(); UI.closeModal(); safeSetVal('ms-text', ''); safeSetVal('ms-id-edit', '');
+                let amo = document.getElementById('ms-add-only'); if(amo) amo.style.display = 'block';
+                this.render();
+            },
+            editPrompt(id) {
+                let node = DB.semantic.find(x => x.id === id);
+                if(node) {
+                    safeSetVal('ms-text', node.text); safeSetVal('ms-id-edit', node.id);
+                    let amo = document.getElementById('ms-add-only'); if(amo) amo.style.display = 'none';
+                    UI.openModal('modal-semantic');
+                }
+            },
+            master(id) {
+                let node = DB.semantic.find(x => x.id === id);
+                if(node) {
+                    node.mastered = true;
+                    DB.semanticVault.push({ date: new Date().toLocaleDateString('id-ID'), text: node.text });
+                    DataManager.save(); UI.showToast("Ilmu Dikuasai. Disimpan di Brankas.", "success"); OS.addExp(10, "Penguasaan Ilmu Baru"); this.render();
+                }
+            },
+            delPrompt(id) {
+                if(confirm("Pangkas simpul ini dan semua cabangnya?")) {
+                    let toDelete = [id];
+                    let findChildren = (pid) => { DB.semantic.filter(n => n.parentId === pid).forEach(n => { toDelete.push(n.id); findChildren(n.id); }); };
+                    findChildren(id);
+                    DB.semantic = DB.semantic.filter(n => !toDelete.includes(n.id));
+                    DataManager.save(); this.render();
+                }
+            },
+            renderVault() {
+                let vc = document.getElementById('vault-list-container'); if(!vc) return;
+                vc.innerHTML = DB.semanticVault.length ? DB.semanticVault.map(v => `
+                    <div style="padding:10px; border-bottom:1px solid rgba(255,255,255,0.05);">
+                        <div class="mono text-muted" style="font-size:11px;">${v.date}</div>
+                        <div style="font-size:14px; color:var(--accent-main); font-weight:bold;">${v.text}</div>
+                    </div>
+                `).join('') : '<p class="text-muted text-center">Brankas kosong. Pelajari sesuatu.</p>';
+            }
+        };
+
+        const Eval = {
+            qs: ["Apa satu hal yang paling membuang waktumu hari ini?", "Apakah kamu bertindak berdasarkan emosi atau logika hari ini?", "Jika besok diulang, apa yang akan kamu lakukan berbeda?", "Ketakutan apa yang kamu hindari hari ini?"],
+            switchTab(tab) {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                if(event && event.currentTarget) { event.currentTarget.classList.add('active'); } 
+                else { let btn = document.querySelector(`.tab-btn[onclick*="${tab}"]`); if(btn) btn.classList.add('active'); }
+                let tabContent = document.getElementById(`tab-${tab}`); if(tabContent) tabContent.classList.add('active');
+                AudioFX.playClick();
+                if(tab === 'daily') setTimeout(() => { renderJournalCalendar(); CanvasFX.drawJourneyChart(); }, 100);
+            },
+            randomizeQ() { 
+                let dailyQ = document.getElementById('daily-q');
+                if(dailyQ) { dailyQ.innerText = `"${this.qs[Math.floor(Math.random()*this.qs.length)]}"`; AudioFX.playClick(); }
+            },
+            submitDaily() {
+                let ans = safeGetVal('daily-ans'); if(!ans) return UI.showToast("Jawab dengan jujur.", "warning");
+                
+                let qElem = document.getElementById('daily-q');
+                DB.journal.daily.unshift({q: qElem ? qElem.innerText : 'Refleksi', a: ans, date: new Date().toDateString()});
+                DB.journal.streak++;
+                DataManager.save(); safeSetVal('daily-ans', '');
+                UI.showToast("Refleksi diukir di memori.", "success"); OS.addExp(15, "Jurnal Harian"); 
+                this.renderHistory(); this.randomizeQ(); renderJournalCalendar(); CanvasFX.drawJourneyChart();
+            },
+            submitWeekly() {
+                let g = safeGetVal('we-good'), b = safeGetVal('we-bad'), n = safeGetVal('we-next');
+                if(!g || !b || !n) return UI.showToast("Sidang membutuhkan semua data form.", "warning");
+                DB.journal.weekly.unshift({good: g, bad: b, next: n, date: new Date().toLocaleDateString('id-ID')});
+                DataManager.save(); ['we-good','we-bad','we-next'].forEach(id => safeSetVal(id, ''));
+                UI.showToast("Sidang Mingguan Disahkan.", "success"); OS.addExp(50, "Evaluasi Mingguan"); this.renderHistory();
+            },
+            viewJournal(idx) {
+                let j = DB.journal.daily[idx]; if(!j) return;
+                let modal = document.getElementById('modal-note-detail');
+                if(modal) { let t = modal.querySelector('.m-title'); if(t) t.innerText = 'Jurnal Refleksi'; }
+                safeSetText('nd-date', j.date);
+                safeSetHtml('nd-text', `<div style="color:var(--accent-main); font-style:italic; margin-bottom:15px; font-family:'Cinzel'; font-size:13px;">${j.q}</div><div style="line-height:1.9; font-size:14px;">${j.a.replace(/\n/g,'<br>')}</div>`);
+                UI.openModal('modal-note-detail');
+            },
+            viewWeekly(idx) {
+                let j = DB.journal.weekly[idx]; if(!j) return;
+                let modal = document.getElementById('modal-note-detail');
+                if(modal) { let t = modal.querySelector('.m-title'); if(t) t.innerText = 'Evaluasi Mingguan'; }
+                safeSetText('nd-date', j.date);
+                safeSetHtml('nd-text', `<div style="margin-bottom:14px;"><b style="color:var(--color-success);">✔ PENCAPAIAN:</b><div style="margin-top:6px; line-height:1.8; font-size:14px;">${j.good.replace(/\n/g,'<br>')}</div></div><div style="margin-bottom:14px;"><b style="color:var(--color-danger);">✖ KEKURANGAN:</b><div style="margin-top:6px; line-height:1.8; font-size:14px;">${j.bad.replace(/\n/g,'<br>')}</div></div><div><b style="color:var(--accent-main);">⇒ TARGET DEPAN:</b><div style="margin-top:6px; line-height:1.8; font-size:14px;">${j.next}</div></div>`);
+                UI.openModal('modal-note-detail');
+            },
+            renderHistory() {
+                safeSetText('es-d-count', DB.journal.daily.length); safeSetText('es-d-streak', DB.journal.streak); safeSetText('es-w-count', DB.journal.weekly.length);
+                
+                // Hitung selisih hari dari Start Date
+                let start = new Date(DB.player.startDate);
+                let now = new Date();
+                let diffTime = Math.abs(now - start);
+                let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                safeSetText('start-date-display', DB.player.startDate);
+                safeSetText('start-days-display', diffDays);
+
+                renderJournalCalendar();
+                setTimeout(() => CanvasFX.drawJourneyChart(), 100);
+
+                const dl = document.getElementById('daily-history');
+                if(dl) {
+                    dl.innerHTML = DB.journal.daily.length ? DB.journal.daily.map((j, idx) => `<div class="log-item" style="cursor:pointer;" onclick="Eval.viewJournal(${idx})"><div class="log-date">${j.date}</div><div class="log-q">${j.q}</div><div class="log-a">${j.a}</div><div style="font-size:11px; color:var(--accent-main); font-family:var(--font-mono); margin-top:8px; opacity:0.7;">▶ Klik untuk baca penuh</div></div>`).join('') : '<p class="txt-muted">Belum ada jejak refleksi.</p>';
+                }
+                
+                const wl = document.getElementById('weekly-history');
+                if(wl) {
+                    wl.innerHTML = DB.journal.weekly.length ? DB.journal.weekly.map((j, idx) => `<div class="log-item" style="cursor:pointer;" onclick="Eval.viewWeekly(${idx})"><div class="log-date">${j.date}</div><div class="log-a"><b>Pencapaian:</b> ${j.good}<br><b class="txt-danger">Kekurangan:</b> ${j.bad}<br><b class="txt-accent">Target Depan:</b> ${j.next}</div><div style="font-size:11px; color:var(--color-info); font-family:var(--font-mono); margin-top:8px; opacity:0.7;">▶ Klik untuk baca penuh</div></div>`).join('') : '<p class="txt-muted">Belum ada rekam sidang mingguan.</p>';
+                }
+            }
+        };
+
+        const Notes = {
+            save() {
+                let text = safeGetVal('note-text'); if(!text) return UI.showToast("Catatan kosong.", "warning");
+                DB.notes.unshift({ id: UI.genId(), text: text, date: new Date().toLocaleDateString('id-ID') });
+                DataManager.save(); safeSetVal('note-text', ''); UI.showToast("Catatan Pribadi Disimpan.", "success"); this.render();
+            },
+            render() {
+                const list = document.getElementById('notes-list'); if(!list) return;
+                list.innerHTML = DB.notes.length ? DB.notes.map(n => `
+                    <div class="note-card" onclick="Notes.viewFull('${n.id}')">
+                        <div class="note-del" onclick="event.stopPropagation(); Notes.del('${n.id}')">✖</div>
+                        <div class="note-text">${n.text.replace(/\n/g, '<br>')}</div>
+                        <div class="note-date">${n.date} - (Klik untuk baca penuh)</div>
+                    </div>
+                `).join('') : '<p class="txt-muted">Belum ada catatan anomali.</p>';
+            },
+            del(id) { DB.notes = DB.notes.filter(n => n.id !== id); DataManager.save(); AudioFX.playClick(); this.render(); },
+            viewFull(id) {
+                let n = DB.notes.find(x => x.id === id);
+                if(n) {
+                    safeSetText('nd-date', n.date);
+                    safeSetHtml('nd-text', n.text.replace(/\n/g, '<br>'));
+                    UI.openModal('modal-note-detail');
+                }
+            }
+        }
+
+        const Principles = {
+            render() {
+                const list = document.getElementById('principles-list');
+                if(list) {
+                    list.innerHTML = DB.principles.map((p, i) => `
+                        <div class="law-card">
+                            <div class="law-del" onclick="Principles.del(${i})">✖</div>
+                            <div class="law-text text-principle-gold" style="animation-delay: ${i*0.5}s;">"${p}"</div>
+                        </div>
+                    `).join('');
+                }
+            },
+            save() {
+                let txt = safeGetVal('mp-text'); if(!txt) return UI.showToast("Isi prinsip tidak boleh kosong.", "warning");
+                DB.principles.push(txt); DataManager.save(); UI.closeModal(); safeSetVal('mp-text', '');
+                UI.showToast("Hukum disahkan secara absolut.", "success"); this.render(); Dashboard.render();
+            },
+            del(idx) { DB.principles.splice(idx, 1); DataManager.save(); AudioFX.playClick(); this.render(); Dashboard.render(); }
+        };
+
+        const Settings = {
+            save() { 
+                let n = safeGetVal('set-name'), i = safeGetVal('set-icon'), t = safeGetVal('set-theme');
+                let mq = safeGetVal('set-marquee');
+                let audioElem = document.getElementById('set-audio'); let audio = audioElem ? audioElem.checked : true;
+                let ecoElem = document.getElementById('set-eco'); let eco = ecoElem ? ecoElem.checked : false;
+                let zodiacElem = document.getElementById('set-zodiac'); let zodiac = zodiacElem ? zodiacElem.checked : true;
+                
+                if(n) { 
+                    DB.config.name = n; DB.config.avatar = i; DB.config.theme = t; 
+                    DB.config.marquee = mq || DEFAULT_STATE.config.marquee;
+                    DB.config.audio = audio; DB.config.ecoMode = eco; DB.config.zodiac = zodiac;
+                    DataManager.save(); this.applyTheme(t); Dashboard.render(); UI.showToast("Konfigurasi Sistem Diperbarui.", "success"); 
+                    
+                    if(eco) document.body.classList.add('eco-mode'); else document.body.classList.remove('eco-mode');
+                    
+                    let mqElem = document.getElementById('home-marquee-display');
+                    if(mqElem) mqElem.innerText = `"${DB.config.marquee}"`;
+                }
+            },
+            applyTheme(theme) { document.documentElement.setAttribute('data-theme', theme); safeSetVal('set-theme', theme); },
+            export() {
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(DB));
+                const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", "mysistem_backup.json");
+                dl.click(); UI.showToast("Data berhasil dibackup.", "success");
+            },
+            import(event) {
+                const file = event.target.files[0];
+                if(file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const newDB = JSON.parse(e.target.result);
+                            if(newDB.player && newDB.config) { DB = newDB; DataManager.save(); location.reload(); }
+                        } catch(err) { UI.showToast("Format JSON salah.", "warning"); }
+                    };
+                    reader.readAsText(file);
+                }
+            },
+            hardReset() { localStorage.removeItem(DB_KEY); location.reload(); }
+        };
+
+        /* --- 8. INITIALIZATION --- */
+        window.onload = () => {
+            CanvasFX.initBg();
+            DataManager.load();
+            Router.init();
+            
+            safeSetVal('set-name', DB.config.name);
+            safeSetVal('set-icon', DB.config.avatar);
+            safeSetVal('set-theme', DB.config.theme);
+            safeSetVal('set-marquee', DB.config.marquee);
+            let sAudio = document.getElementById('set-audio'); if(sAudio) sAudio.checked = DB.config.audio;
+            let sEco = document.getElementById('set-eco'); if(sEco) sEco.checked = DB.config.ecoMode;
+            let sZodiac = document.getElementById('set-zodiac'); if(sZodiac) sZodiac.checked = (DB.config.zodiac !== false);
+            
+            startRealtimeClock();
+            Router.nav('home');
+            Eval.randomizeQ();
+            Notes.render();
+            
+            document.body.addEventListener('click', () => AudioFX.init(), {once:true});
+        };
+    </script>
+</body>
+</html>
