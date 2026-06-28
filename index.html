@@ -178,8 +178,6 @@
         /* Bar XP Kinetik (Hologram Transparan Elegan) */
         .bg-xp { background: linear-gradient(90deg, rgba(0,200,255,0.65), rgba(255,215,0,0.60), rgba(160,60,255,0.65), rgba(0,200,255,0.65)); background-size: 250% auto; animation: holoShine 5s linear infinite; box-shadow: 0 0 8px rgba(120,80,255,0.25), 0 0 16px rgba(0,200,255,0.12); }
         
-        /* PERBAIKAN: kelas bg-hologram dipakai di bar XP tapi sebelumnya tidak punya definisi warna,
-           sehingga bar XP tidak terlihat (tidak ada garis/warnanya). Disamakan dengan gradasi hologram. */
         .bg-hologram { background: linear-gradient(90deg, rgba(0,200,255,0.60), rgba(160,60,255,0.62), rgba(255,215,0,0.58), rgba(0,200,255,0.60)); background-size: 300% auto; animation: holoShine 6s linear infinite; box-shadow: 0 0 10px rgba(130,70,255,0.28), 0 0 20px rgba(0,180,255,0.12); }
         
         .bg-hp { background: var(--color-danger); box-shadow: 0 0 10px var(--color-danger); }
@@ -303,7 +301,7 @@
         .task-board { display: flex; flex-direction: column; gap: 24px; }
         .vip-task-box {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 42, 85, 0.08));
-            border: 1px solid rgba(255, 215, 0, 0.4); border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 215, 0, 0.4); border-radius: 16px;
             padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(255, 42, 85, 0.05);
             position: relative; overflow: hidden;
         }
@@ -328,7 +326,7 @@
         .tc-check.checked::after { content: '✓'; color: #000; font-weight: 900; font-size: 14px; }
         .tc-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-main); }
 
-        /* Tombol Edit & Hapus pada Kartu Misi (Tambahan: sebelumnya misi tidak bisa diedit/dihapus) */
+        /* Tombol Edit & Hapus pada Kartu Misi */
         .tc-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
         .tc-edit, .tc-del { color: var(--text-muted); cursor: pointer; font-size: 15px; transition: 0.2s; }
         .tc-edit:hover { color: var(--accent-main); transform: scale(1.15); }
@@ -352,7 +350,7 @@
         .goal-column { display: flex; flex-direction: column; gap: 15px; }
         .goal-header { font-family: 'Cinzel'; font-size: 16px; color: var(--text-main); text-align: center; padding-bottom: 15px; border-bottom: 2px dashed rgba(255,255,255,0.1); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
         
-        .goal-card { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 20px; position: relative; transition: 0.3s; display: flex; flex-direction: column; gap: 12px; }
+        .goal-card { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px; position: relative; transition: 0.3s; display: flex; flex-direction: column; gap: 12px; }
         .goal-card:hover { border-color: var(--accent-main); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
         .gc-text { font-size: 15px; line-height: 1.5; color: var(--text-main); font-weight: 500; }
         
@@ -507,7 +505,6 @@
             .m-nav-btn.active { color: var(--accent-main); transform: translateY(-3px); }
             .m-nav-btn.active svg { filter: drop-shadow(var(--accent-glow)); stroke-width: 2; }
 
-            /* PERBAIKAN: Panel "Lainnya" agar semua menu tetap bisa diakses di mobile/landscape */
             .mobile-more-panel {
                 display: none; position: fixed; left: 12px; right: 12px; bottom: calc(var(--header-h) + 10px);
                 background: rgba(10,10,15,0.98); border: 1px solid var(--glass-border); border-radius: 14px;
@@ -521,7 +518,7 @@
             .hero-stats { flex-direction: column; text-align: center; }
             .h-money-box { flex-direction: column; gap: 10px; border-left: none; border-top: 1px dashed rgba(255,255,255,0.1); padding-left: 0; padding-top: 15px; margin-top: 10px; width: 100%; }
             .h-info-wrap { flex-direction: column; }
-            .slide-banner { display: block; width: 100%; border-left: none; padding-left: 0; margin-left: 0; margin-top: 10px; } /* Diperbaiki: tetap tampil di mobile, pindah ke baris baru */
+            .slide-banner { display: block; width: 100%; border-left: none; padding-left: 0; margin-left: 0; margin-top: 10px; }
         }
     </style>
 </head>
@@ -551,7 +548,7 @@
                 </div>
                 <div class="brand-info" style="margin-left: 15px;">
                     <h1 id="sb-name" class="text-hologram" style="font-size: 18px; letter-spacing: 1px; font-family: 'Cinzel'; margin-bottom: 2px;">Admin</h1>
-                    <p style="font-size: 10px; color: var(--accent-main); font-family: var(--font-mono); letter-spacing: 2px;">APEX OS v15</p>
+                    <p style="font-size: 10px; color: var(--accent-main); font-family: var(--font-mono); letter-spacing: 2px;">APEX OS v16</p>
                 </div>
             </div>
             
@@ -979,7 +976,7 @@
 
                         <div class="col-12 glass-panel" style="border-color: rgba(255, 42, 85, 0.4); background: rgba(255, 42, 85, 0.05);">
                             <h3 class="panel-title txt-danger" style="margin-bottom: 15px;">Zona Kehancuran (Factory Reset)</h3>
-                            <p class="text-main" style="font-size: 13px; margin-bottom: 20px;">Tindakan ini akan memformat seluruh memori penyimpanan lokal (Local Storage) Anda. Semua Progres, Keuangan, dan Catatan akan musnah selamanya.</p>
+                            <p class="text-main" style="font-size: 13px; margin-bottom: 20px;">Tindakan ini akan memformat memori Cloud Anda dan Penyimpanan Lokal. Semua Progres akan musnah selamanya.</p>
                             <button class="btn btn-danger" onclick="UI.openModal('modal-reset')">HANCURKAN REALITAS INI</button>
                         </div>
                     </div>
@@ -998,7 +995,6 @@
             <div class="m-nav-btn" id="mobile-more-btn" onclick="document.getElementById('mobile-more-panel').classList.toggle('open')"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg><span>Lainnya</span></div>
         </nav>
 
-        <!-- PERBAIKAN: Panel menu tambahan agar semua menu (Visi & Target, Pohon Ilmu, Prinsip & Nilai, Konfigurasi OS) tetap bisa diakses saat mobile/landscape -->
         <div id="mobile-more-panel" class="mobile-more-panel">
             <div class="nav-item" data-nav="goals" onclick="document.getElementById('mobile-more-panel').classList.remove('open')"><svg><use href="#i-target"></use></svg> Visi & Target</div>
             <div class="nav-item" data-nav="semantic" onclick="document.getElementById('mobile-more-panel').classList.remove('open')"><svg><use href="#i-tree"></use></svg> Pohon Ilmu</div>
@@ -1059,7 +1055,6 @@
                         <span style="font-size:10px; color:var(--text-main); cursor:pointer; background:rgba(255,255,255,0.1); padding:4px 6px; border-radius:3px;" onclick="Goals.setRecDate(365)">+1 Thn</span>
                     </div>
                 </div>
-                <!-- Native browser calendar picker -->
                 <input type="date" id="mg-date" class="input-box" onclick="this.showPicker ? this.showPicker() : null">
             </div>
             <div class="m-foot"><button class="btn btn-accent" style="width: 100%;" onclick="Goals.save()">Simpan Target</button></div>
@@ -1138,7 +1133,7 @@
         <div class="modal-content" id="modal-reset" style="display:none; border-color: var(--color-danger);">
             <div class="m-head" style="background: rgba(255, 42, 85, 0.05); border-color: rgba(255, 42, 85, 0.2);"><h3 class="m-title" style="color: var(--color-danger);">Format Dimensi?</h3><button class="m-close" onclick="UI.closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
             <div class="m-body">
-                <p style="color: var(--text-muted); font-size: 14px; text-align: center; line-height: 1.6;">Proses ini bersifat permanen. Seluruh pencapaian, analitik, dan hukum yang tersimpan di memori browser ini akan musnah.</p>
+                <p style="color: var(--text-muted); font-size: 14px; text-align: center; line-height: 1.6;">Proses ini bersifat permanen. Seluruh pencapaian, analitik, dan hukum yang tersimpan di Cloud dan Browser ini akan musnah.</p>
             </div>
             <div class="m-foot" style="justify-content: center;">
                 <button class="btn" onclick="UI.closeModal()">Batal</button><button class="btn btn-danger" onclick="Settings.hardReset()">MUSNAHKAN</button>
@@ -1148,7 +1143,7 @@
     </div>
 
     <!-- ════════════════════════════════════════════════════════════════════════
-         [ JAVASCRIPT ARSITEKTUR KOGNITIF (NO EXTERNAL LIBRARIES) ]
+         [ JAVASCRIPT ARSITEKTUR KOGNITIF - CLOUD FIREBASE REST ]
          ════════════════════════════════════════════════════════════════════════ -->
     <script>
         /* --- HELPER MENCEGAH ERROR DOM NULL --- */
@@ -1159,8 +1154,10 @@
         function safeAddClass(id, cls) { let el = document.getElementById(id); if(el) el.classList.add(cls); }
         function safeRemClass(id, cls) { let el = document.getElementById(id); if(el) el.classList.remove(cls); }
 
-        /* --- 1. LOCAL STORAGE STATE ENGINE --- */
+        /* --- 1. LOCAL STORAGE & FIREBASE STATE ENGINE --- */
         const DB_KEY = 'MYSISTEM_APEX_OS_V16';
+        // URL Realtime Database yang diberikan ditambahkan ekstensi file .json untuk endpoint REST API
+        const FIREBASE_URL = 'https://mysistem2-baee3-default-rtdb.firebaseio.com/apex_os_data.json';
         
         const DEFAULT_STATE = {
             config: { name: 'Pewaris Matrix', avatar: '☯', theme: 'gold', audio: true, ecoMode: false, zodiac: true, marquee: 'PANTANG MENYERAH PADA KEMALASAN. DISIPLIN ADALAH HARGA MATI UNTUK KEBEBASAN.' },
@@ -1184,17 +1181,54 @@
             semanticVault: []
         };
 
-        let DB = {};
+        let DB = JSON.parse(JSON.stringify(DEFAULT_STATE));
 
         const DataManager = {
-            load() {
-                const raw = localStorage.getItem(DB_KEY);
-                DB = raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT_STATE));
+            async load() {
+                try {
+                    UI.showToast("Menyelaraskan data dari Cloud Firebase...", "normal");
+                    
+                    // Coba tarik data dari Cloud (Firebase REST)
+                    const response = await fetch(FIREBASE_URL);
+                    if (response.ok) {
+                        const raw = await response.json();
+                        if (raw) {
+                            DB = raw;
+                        } else {
+                            // Jika Cloud kosong
+                            DB = JSON.parse(JSON.stringify(DEFAULT_STATE));
+                        }
+                    } else {
+                        throw new Error("Respon jaringan dari Firebase gagal");
+                    }
+                } catch(e) {
+                    console.error("Kesalahan saat load Cloud", e);
+                    // Fallback lokal jika internet putus
+                    const localRaw = localStorage.getItem(DB_KEY);
+                    DB = localRaw ? JSON.parse(localRaw) : JSON.parse(JSON.stringify(DEFAULT_STATE));
+                    UI.showToast("Mode Offline: Menggunakan penyimpanan lokal.", "warning");
+                }
                 
-                // Compatibility adjustments
+                // Compatibility & Integrity Checks
+                // (PENTING: Memastikan array kosong tetap ada meskipun dihapus otomatis oleh Firebase)
+                if(!DB.config) DB.config = DEFAULT_STATE.config;
+                if(!DB.player) DB.player = DEFAULT_STATE.player;
+                if(!DB.tasks) DB.tasks = [];
+                if(!DB.finances) DB.finances = [];
+                if(!DB.timeblocks) DB.timeblocks = [];
                 if(!DB.notes) DB.notes = [];
+                if(!DB.principles) DB.principles = [];
+                if(!DB.semantic) DB.semantic = [];
+                if(!DB.semanticVault) DB.semanticVault = [];
+                
+                if(!DB.journal) DB.journal = { daily: [], weekly: [], streak: 0 };
+                if(!DB.journal.daily) DB.journal.daily = [];
+                if(!DB.journal.weekly) DB.journal.weekly = [];
+
                 if(!DB.config.marquee) DB.config.marquee = DEFAULT_STATE.config.marquee;
-                if(!DB.goals.long) DB.goals = DEFAULT_STATE.goals;
+                if(!DB.goals) DB.goals = { long: [], short: [] };
+                if(!DB.goals.long) DB.goals.long = [];
+                if(!DB.goals.short) DB.goals.short = [];
                 if(!DB.player.startDate) DB.player.startDate = new Date().toDateString();
                 if(DB.config.zodiac === undefined) DB.config.zodiac = true;
                 
@@ -1202,7 +1236,19 @@
                 if(DB.config.ecoMode) document.body.classList.add('eco-mode');
                 this.checkDailyLogic();
             },
-            save() { localStorage.setItem(DB_KEY, JSON.stringify(DB)); },
+            save() { 
+                // 1. Simpan Lokal untuk kecepatan & backup
+                localStorage.setItem(DB_KEY, JSON.stringify(DB)); 
+                
+                // 2. Tembak ke Firebase di latar belakang (tanpa memblokir layar)
+                fetch(FIREBASE_URL, {
+                    method: 'PUT', // PUT me-replace seluruh node dengan JSON baru
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(DB)
+                }).catch(e => {
+                    console.error("Kesalahan saat sinkronisasi Cloud", e);
+                });
+            },
             checkDailyLogic() {
                 const today = new Date().toDateString();
                 if (DB.player.lastLogin !== today) {
@@ -1227,16 +1273,16 @@
         /* --- 2. AUDIO SYNTHESIS ENGINE (NO EXTERNAL FILES) --- */
         const AudioFX = {
             ctx: null,
-            init() { if(!DB.config.audio) return; if(!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if(this.ctx.state === 'suspended') this.ctx.resume(); },
+            init() { if(!DB.config || !DB.config.audio) return; if(!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if(this.ctx.state === 'suspended') this.ctx.resume(); },
             playClick() { 
-                if(!DB.config.audio || !this.ctx) return;
+                if(!DB.config || !DB.config.audio || !this.ctx) return;
                 const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
                 o.type = 'triangle'; o.frequency.setValueAtTime(400, this.ctx.currentTime); o.frequency.exponentialRampToValueAtTime(200, this.ctx.currentTime + 0.05);
                 g.gain.setValueAtTime(0.05, this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
                 o.connect(g); g.connect(this.ctx.destination); o.start(); o.stop(this.ctx.currentTime + 0.05);
             },
             playMissionComplete() { 
-                if(!DB.config.audio || !this.ctx) return;
+                if(!DB.config || !DB.config.audio || !this.ctx) return;
                 const freqs = [392.00, 493.88, 587.33, 783.99]; // Epic G Major arpeggio
                 freqs.forEach((f, i) => {
                     const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
@@ -1249,14 +1295,14 @@
                 });
             },
             playError() { 
-                if(!DB.config.audio || !this.ctx) return;
+                if(!DB.config || !DB.config.audio || !this.ctx) return;
                 const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
                 o.type = 'sawtooth'; o.frequency.setValueAtTime(100, this.ctx.currentTime); o.frequency.linearRampToValueAtTime(50, this.ctx.currentTime + 0.3);
                 g.gain.setValueAtTime(0.1, this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
                 o.connect(g); g.connect(this.ctx.destination); o.start(); o.stop(this.ctx.currentTime + 0.3);
             },
             playLevelUp() { 
-                if(!DB.config.audio || !this.ctx) return;
+                if(!DB.config || !DB.config.audio || !this.ctx) return;
                 const freqs = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; 
                 freqs.forEach((f, i) => {
                     const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
@@ -1415,7 +1461,7 @@
                     this.ctx.beginPath(); this.ctx.arc(n.x, n.y, n.r, 0, Math.PI*2); this.ctx.fill();
                 });
                 
-                // Zodiac symbols floating (can be toggled off)
+                // Zodiac symbols floating
                 if(DB.config && DB.config.zodiac !== false && this.zodiacSymbols) {
                     this.ctx.textAlign = 'center';
                     this.zodiacSymbols.forEach(z => {
@@ -1523,11 +1569,6 @@
                     ctx.fillStyle = '#fff'; ctx.font = '10px JetBrains Mono'; ctx.fillText(UI.formatRp(val), x + barW/2, y - 5);
                     ctx.fillStyle = '#999'; ctx.font = '10px Inter'; ctx.fillText(cat.substring(0,8), x + barW/2, h - pb + 15);
                 });
-            },
-
-            drawJournalChart() {
-                // replaced by renderJournalCalendar — kept as no-op for compatibility
-                renderJournalCalendar();
             },
 
             drawJourneyChart() {
@@ -1694,11 +1735,11 @@
                 });
                 safeSetText('dh-money-in', UI.formatRp(tIn)); safeSetText('dh-money-out', UI.formatRp(tOut));
 
-                // Home Marquee Text (From config)
+                // Home Marquee Text
                 let mqElem = document.getElementById('home-marquee-display');
                 if(mqElem) mqElem.innerText = `"${c.marquee || DEFAULT_STATE.config.marquee}"`;
 
-                // Principles Home (All listed neatly in a block)
+                // Principles Home
                 let hpList = document.getElementById('home-principle-display');
                 if(hpList) {
                     hpList.innerHTML = DB.principles.length ? DB.principles.map((p, i) => `
@@ -1706,7 +1747,6 @@
                     `).join('') : '<div class="txt-muted">Pahat prinsip Anda di menu Prinsip.</div>';
                 }
 
-                // AI Advisor Feature
                 safeSetText('ai-advisor-text', OS.getRecommendation());
 
                 // Quick Quests
@@ -1740,7 +1780,6 @@
                 const actD = document.getElementById('q-vip-list'), normD = document.getElementById('q-normal-list'), hisD = document.getElementById('q-history-list');
                 if(!actD || !normD || !hisD) return;
                 
-                // UNLIMITED TASKS Logic
                 let high = DB.tasks.filter(q => !q.done && (q.prio === 'Kritis' || q.prio === 'Tinggi'));
                 let normal = DB.tasks.filter(q => !q.done && q.prio === 'Normal');
                 let his = DB.tasks.filter(q => q.done).slice(0, 5);
@@ -1824,18 +1863,15 @@
                     return `<tr><td class="txt-muted mono">${f.date}</td><td>${f.desc}</td><td><span class="badge ${isIn?'bdg-low':'bdg-high'}">${f.type}</span></td><td class="mono" style="text-align:right; font-weight:bold; color:${isIn?'var(--color-success)':'var(--color-danger)'}">${isIn?'+':'-'}${UI.formatRp(f.amount)}</td></tr>`;
                 }).join('') : '<tr><td colspan="4" style="text-align:center; color:#555;">Belum ada jejak finansial.</td></tr>';
 
-                // Chart & Summary Data Calculations
                 let dPts = [], bal = 0, categories = {};
                 let tin=0, tout=0;
                 let sorted = [...DB.finances].sort((a,b)=>a.ms-b.ms);
-                let rec = sorted.slice(-10); // Last 10 transactions for line chart
+                let rec = sorted.slice(-10); 
                 
-                // For Line Chart
                 sorted.slice(0, sorted.length-rec.length).forEach(f => { bal += (f.type==='IN'?f.amount:-f.amount); });
                 if(rec.length>0) dPts.push(bal);
                 rec.forEach(f => { bal += (f.type==='IN'?f.amount:-f.amount); dPts.push(bal); });
                 
-                // For Summary & Bar Chart
                 DB.finances.forEach(f => {
                     if(f.type === 'IN') tin += f.amount;
                     if(f.type === 'OUT') { 
@@ -1879,7 +1915,6 @@
                 });
                 this.updateCountdowns();
 
-                // Render recommendations
                 let recBox = document.getElementById('goal-recommendation-list');
                 if(recBox) {
                     let recs = this.getGoalRecommendation();
@@ -1982,12 +2017,6 @@
                 
                 let html = '';
                 DB.timeblocks.forEach(t => {
-                    let [sh, sm] = t.start.split(':').map(Number);
-                    let [eh, em] = t.end.split(':').map(Number);
-                    let startMin = sh*60 + sm; let endMin = eh*60 + em;
-                    if(endMin <= startMin) endMin = startMin + 60; // fallback 1 hr
-                    let duration = endMin - startMin;
-
                     html += `
                         <div class="sch-item" id="sch-${t.id}">
                             <div class="sch-dot"></div>
@@ -1999,10 +2028,9 @@
                     `;
                 });
                 list.innerHTML = html;
-                this.updateIndicator(new Date()); // Call immediately to set active states
+                this.updateIndicator(new Date()); 
             },
             updateIndicator(now) {
-                // Update active states by looping and adding active-now class
                 DB.timeblocks.forEach(t => {
                     let [sh, sm] = t.start.split(':').map(Number);
                     let [eh, em] = t.end.split(':').map(Number);
@@ -2176,7 +2204,6 @@
             renderHistory() {
                 safeSetText('es-d-count', DB.journal.daily.length); safeSetText('es-d-streak', DB.journal.streak); safeSetText('es-w-count', DB.journal.weekly.length);
                 
-                // Hitung selisih hari dari Start Date
                 let start = new Date(DB.player.startDate);
                 let now = new Date();
                 let diffTime = Math.abs(now - start);
@@ -2285,13 +2312,20 @@
                     reader.readAsText(file);
                 }
             },
-            hardReset() { localStorage.removeItem(DB_KEY); location.reload(); }
+            hardReset() { 
+                localStorage.removeItem(DB_KEY); 
+                // Hapus juga data dari Cloud
+                fetch(FIREBASE_URL, { method: 'DELETE' }).then(() => location.reload()).catch(() => location.reload());
+            }
         };
 
-        /* --- 8. INITIALIZATION --- */
-        window.onload = () => {
+        /* --- 8. INITIALIZATION (Mendukung fungsi Async/Await) --- */
+        window.onload = async () => {
             CanvasFX.initBg();
-            DataManager.load();
+            
+            // Tunggu data dimuat dari Firebase secara Asynchronous
+            await DataManager.load();
+            
             Router.init();
             
             safeSetVal('set-name', DB.config.name);
@@ -2303,9 +2337,19 @@
             let sZodiac = document.getElementById('set-zodiac'); if(sZodiac) sZodiac.checked = (DB.config.zodiac !== false);
             
             startRealtimeClock();
+            
+            // Karena ini asinkronous, kita langsung mengarahkan tampilan ke home & render data terbaru
             Router.nav('home');
-            Eval.randomizeQ();
+            
+            // Render bagian-bagian di balik layar setelah data berhasil terambil
+            Tasks.render();
+            Finance.render();
+            Goals.render();
+            Timeblock.render();
             Notes.render();
+            Principles.render();
+            SemanticTree.render();
+            Eval.randomizeQ();
             
             document.body.addEventListener('click', () => AudioFX.init(), {once:true});
         };
